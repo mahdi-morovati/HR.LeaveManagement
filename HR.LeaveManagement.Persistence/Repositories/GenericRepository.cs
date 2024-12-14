@@ -16,12 +16,12 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 
     public async Task<IReadOnlyList<T>> GetAsync()
     {
-        return await Context.Set<T>().ToListAsync();
+        return await Context.Set<T>().AsNoTracking().ToListAsync();
     }
 
     public async Task<T?> GetByIdAsync(int id)
     {
-        return await Context.Set<T>().FindAsync(id);
+        return await Context.Set<T>().AsNoTracking().FirstOrDefaultAsync(q => q.Id == id);
     }
 
     public async Task CreateAsync(T entity)
