@@ -19,8 +19,8 @@
 
     <ItemGroup>
       <Folder Include="Features\LeaveAllocation\" />
-      <Folder Include="Features\LeaveRequest\Commands\" />
-      <Folder Include="Features\LeaveRequest\Shared\" />
+      <Folder Include="Features\LeaveRequest\Commands\DeleteLeaveRequest\" />
+      <Folder Include="Features\LeaveRequest\Commands\UpdateLeaveRequest\" />
     </ItemGroup>
 
 </Project>
