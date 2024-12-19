@@ -17,4 +17,10 @@
       <PackageReference Include="MediatR" Version="12.4.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Features\LeaveAllocation\" />
+      <Folder Include="Features\LeaveRequest\Commands\DeleteLeaveRequest\" />
+      <Folder Include="Features\LeaveRequest\Commands\UpdateLeaveRequest\" />
+    </ItemGroup>
+
 </Project>
