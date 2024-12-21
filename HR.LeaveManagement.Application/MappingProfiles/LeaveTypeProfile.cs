@@ -5,9 +5,9 @@ using HR.LeaveManagement.Domain;
 
 namespace HR.LeaveManagement.Application.MappingProfiles;
 
-public class LeaveTypeProfiles : Profile
+public class LeaveTypeProfile : Profile
 {
-    public LeaveTypeProfiles()
+    public LeaveTypeProfile()
     {
         CreateMap<LeaveTypeDto, LeaveType>().ReverseMap();
         CreateMap<LeaveType, LeaveTypeDetailDto>();

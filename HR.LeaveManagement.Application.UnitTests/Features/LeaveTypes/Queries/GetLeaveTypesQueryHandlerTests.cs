@@ -18,10 +18,10 @@ public class GetLeaveTypesQueryHandlerTests
 
     public GetLeaveTypesQueryHandlerTests()
     {
-        _mockRepo = MockLeaveTypeRepository.GetLeaveTypeMockRepository();
+        _mockRepo = MockLeaveTypeRepository.GetMockLeaveTypeRepository();
         var mapperConfig = new MapperConfiguration(c =>
         {
-            c.AddProfile<LeaveTypeProfiles>();
+            c.AddProfile<LeaveTypeProfile>();
         });
 
         _mapper = mapperConfig.CreateMapper();
