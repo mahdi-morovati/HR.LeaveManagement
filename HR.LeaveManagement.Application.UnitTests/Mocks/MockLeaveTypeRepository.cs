@@ -25,7 +25,7 @@ public class MockLeaveTypeRepository
             new LeaveType
             {
                 Id = 3,
-                DefaultDays = 20,
+                DefaultDays = 15,
                 Name = "Test Maternity"
             }
         };
@@ -40,6 +40,10 @@ public class MockLeaveTypeRepository
                 leaveTypes.Add(leaveType);
                 return Task.CompletedTask;
             });
+        
+        mockRepo.Setup(r => r.IsLeaveTypeUnique(It.IsAny<string>()))
+            .ReturnsAsync((string name) => !leaveTypes.Any(x => x.Name == name));
+
 
         return mockRepo;
     }
