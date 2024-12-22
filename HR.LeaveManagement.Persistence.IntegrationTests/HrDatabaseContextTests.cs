@@ -24,7 +24,7 @@ public class HrDatabaseContextTests
         var leaveType = new LeaveType
         {
             Id = 1,
-            DeafaultDays = 10,
+            DefaultDays = 10,
             Name = "Test Vacation"
         };
 
@@ -43,7 +43,7 @@ public class HrDatabaseContextTests
         var leaveType = new LeaveType
         {
             Id = 1,
-            DeafaultDays = 10,
+            DefaultDays = 10,
             Name = "Test Vacation"
         };
 

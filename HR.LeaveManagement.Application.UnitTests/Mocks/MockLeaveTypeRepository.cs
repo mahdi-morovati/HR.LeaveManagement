@@ -13,19 +13,19 @@ public class MockLeaveTypeRepository
             new LeaveType
             {
                 Id = 1,
-                DeafaultDays = 10,
+                DefaultDays = 10,
                 Name = "Test Vacation"
             },
             new LeaveType
             {
                 Id = 2,
-                DeafaultDays = 15,
+                DefaultDays = 15,
                 Name = "Test Sick"
             },
             new LeaveType
             {
                 Id = 3,
-                DeafaultDays = 20,
+                DefaultDays = 20,
                 Name = "Test Maternity"
             }
         };
