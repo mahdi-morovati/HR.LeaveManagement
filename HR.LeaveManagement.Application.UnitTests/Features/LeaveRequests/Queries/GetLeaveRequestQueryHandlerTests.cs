@@ -1,6 +1,7 @@
 using AutoMapper;
 using HR.LeaveManagement.Application.Contracts.Logging;
 using HR.LeaveManagement.Application.Contracts.Persistence;
+using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Features.LeaveRequest.Queries.GetLeaveRequestDetail;
 using HR.LeaveManagement.Application.Features.LeaveRequest.Queries.GetLeaveRequestList;
 using HR.LeaveManagement.Application.MappingProfiles;
@@ -27,8 +28,6 @@ public class GetLeaveRequestQueryHandlerTests
             c.AddProfile<LeaveTypeProfile>();
         });
         _mapper = mapperConfig.CreateMapper();
-
-    
     }
 
 
@@ -38,7 +37,7 @@ public class GetLeaveRequestQueryHandlerTests
         var handler = new GetLeaveRequestListQueryHandler(_mockRepo.Object, _mapper);
 
         var result = await handler.Handle(new GetLeaveRequestListQuery(), CancellationToken.None);
-        
+
         result.ShouldBeOfType<List<LeaveRequestListDto>>();
         result.Count.ShouldBe(3);
     }
@@ -64,19 +63,37 @@ public class GetLeaveRequestQueryHandlerTests
         };
         _mockRepo.Setup(r => r.GetLeaveRequestWithDetails(leaveRequestId))
             .ReturnsAsync(leaveRequest);
-        
+
         var handler = new GetLeaveRequestDetailQueryHandler(_mockRepo.Object, _mapper);
-         
-        
+
+
         // Act
-        var result = await handler.Handle(new GetLeaveRequestDetailQuery {Id = leaveRequestId}, CancellationToken.None);
-        
+        var result = await handler.Handle(new GetLeaveRequestDetailQuery { Id = leaveRequestId },
+            CancellationToken.None);
+
         // Assert
         result.ShouldNotBeNull();
         result.Id.ShouldBe(leaveRequestId);
         result.LeaveType.Name.ShouldBe(leaveRequest.LeaveType.Name);
         result.RequestingEmployeeId.ShouldBe(leaveRequest.RequestingEmployeeId);
-
     }
 
+    [Fact]
+    public async Task Handle_LeaveRequestNotFound_ThrowsNotFoundException()
+    {
+        // Arrange
+        var leaveRequestId = 10000;
+        _mockRepo.Setup(r => r.GetLeaveRequestWithDetails(leaveRequestId))
+            .ReturnsAsync(() => null);
+
+        var handler = new GetLeaveRequestDetailQueryHandler(_mockRepo.Object, _mapper);
+
+        // Act & Assert
+        await Should.ThrowAsync<NotFoundException>(async () =>
+            {
+                await handler.Handle(new GetLeaveRequestDetailQuery { Id = leaveRequestId },
+                    CancellationToken.None);
+            }
+        );
+    }
 }
