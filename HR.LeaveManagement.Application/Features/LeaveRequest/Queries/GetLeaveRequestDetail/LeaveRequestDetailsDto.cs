@@ -5,7 +5,7 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequest.Queries.GetLeaveR
 
 public class LeaveRequestDetailsDto
 {
-    public int id { get; set; }
+    public int Id { get; set; }
     public Employee Employee { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }

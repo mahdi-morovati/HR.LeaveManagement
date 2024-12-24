@@ -21,5 +21,6 @@
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Queries.GetLeaveRequestQueryHandlerTests.GetLeaveRequestListTest&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveTypes.Queries.GetLeaveTypesQueryHandlerTests.GetLeaveTypeListTest&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Queries.GetLeaveRequestQueryHandlerTests.Mapping_LeaveRequest_To_LeaveRequestListDto_ShouldWork&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Queries.GetLeaveRequestQueryHandlerTests.Handle_LeaveRequestFound_ReturnsLeaveRequestDetailsDto&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
