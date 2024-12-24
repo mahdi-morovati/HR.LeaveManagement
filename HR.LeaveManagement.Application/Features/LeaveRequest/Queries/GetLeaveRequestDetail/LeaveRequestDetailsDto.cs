@@ -3,7 +3,7 @@ using HR.LeaveManagement.Application.Models.Identity;
 
 namespace HR.LeaveManagement.Application.Features.LeaveRequest.Queries.GetLeaveRequestDetail;
 
-public class LeaveRequestDetailDto
+public class LeaveRequestDetailsDto
 {
     public int id { get; set; }
     public Employee Employee { get; set; }

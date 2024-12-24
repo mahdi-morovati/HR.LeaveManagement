@@ -12,10 +12,14 @@
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveTypes.Commands.CreateLeaveTypeCommandTests.Handle_ValidLeaveType&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveTypes.Commands.CreateleaveTypeCommandTests.Handle_ValidLeaveType&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Queries.CreateLeaveTypeCommandTests.Handle_ValidLeaveType&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Queries.GetLeaveRequestQueryHandlerTests.GetLeaveRequestListTest&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=736ee344_002Dc14f_002D4359_002D8fdb_002D3e4c56cc64f8/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Handle_ValidLeaveType" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveTypes.Commands.CreateLeaveTypeCommandTests.Handle_ValidLeaveType&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Queries.GetLeaveRequestQueryHandlerTests.GetLeaveRequestListTest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveTypes.Queries.GetLeaveTypesQueryHandlerTests.GetLeaveTypeListTest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Queries.GetLeaveRequestQueryHandlerTests.Mapping_LeaveRequest_To_LeaveRequestListDto_ShouldWork&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
