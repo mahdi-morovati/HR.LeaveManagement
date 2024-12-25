@@ -1,15 +1,16 @@
 using AutoMapper;
-using HR.LeaveManagement.Application.Contracts.Logging;
 using HR.LeaveManagement.Application.Contracts.Persistence;
 using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Features.LeaveRequest.Queries.GetLeaveRequestDetail;
 using HR.LeaveManagement.Application.Features.LeaveRequest.Queries.GetLeaveRequestList;
+using HR.LeaveManagement.Application.Features.LeaveRequest.Queries.GetLeaveRequestsByUser;
 using HR.LeaveManagement.Application.MappingProfiles;
 using HR.LeaveManagement.Application.UnitTests.Mocks;
 using HR.LeaveManagement.Domain;
 using Moq;
 using Shouldly;
 using Xunit;
+using LeaveRequestListDto = HR.LeaveManagement.Application.Features.LeaveRequest.Queries.GetLeaveRequestList.LeaveRequestListDto;
 
 namespace HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Queries;
 
@@ -96,4 +97,33 @@ public class GetLeaveRequestQueryHandlerTests
             }
         );
     }
+    
+    [Fact]
+    public async Task Handle_LeaveRequestsByUser_Success()
+    {
+        // Arrange
+        var requestingEmployeeId = "1";
+        var handler = new GetLeaveRequestsByUserQueryHandler(_mockRepo.Object, _mapper);
+
+        // Act
+        var result = await handler.Handle(
+            new GetLeaveRequestsByUserQuery { RequestingEmployeeId = requestingEmployeeId },
+            CancellationToken.None);
+
+        // Assert
+        result.ShouldNotBeNull(); // Ensure the result is not null
+        result.ShouldBeOfType<List<LeaveRequestsByUserDto>>(); // Ensure the correct type is returned
+        result.Count.ShouldBe(2); // Ensure there are exactly 2 items
+        result.All(r => r.RequestingEmployeeId == requestingEmployeeId).ShouldBeTrue(); // Validate all items belong to the given employee
+
+        // Additional validation for fields
+        foreach (var leaveRequest in result)
+        {
+            leaveRequest.RequestingEmployeeId.ShouldBe(requestingEmployeeId);
+            leaveRequest.LeaveType.ShouldNotBeNull(); // Ensure LeaveType is not null
+            leaveRequest.StartDate.ShouldBeLessThan(leaveRequest.EndDate); // Ensure StartDate is before EndDate
+        }
+    }
+
+    
 }
