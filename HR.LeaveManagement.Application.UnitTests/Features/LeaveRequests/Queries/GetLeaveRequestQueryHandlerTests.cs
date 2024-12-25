@@ -32,6 +32,9 @@ public class GetLeaveRequestQueryHandlerTests
     }
 
 
+    /// <summary>
+    /// GetLeaveRequestList success
+    /// </summary>
     [Fact]
     public async Task GetLeaveRequestsWithDetailsTest()
     {
@@ -43,6 +46,9 @@ public class GetLeaveRequestQueryHandlerTests
         result.Count.ShouldBe(3);
     }
 
+    /// <summary>
+    /// GetLeaveRequestDetail success
+    /// </summary>
     [Fact]
     public async Task Handle_LeaveRequestFound_ReturnsLeaveRequestDetailsDto()
     {
@@ -79,6 +85,9 @@ public class GetLeaveRequestQueryHandlerTests
         result.RequestingEmployeeId.ShouldBe(leaveRequest.RequestingEmployeeId);
     }
 
+    /// <summary>
+    /// GetLeaveRequestDetail not found exception
+    /// </summary>
     [Fact]
     public async Task Handle_LeaveRequestNotFound_ThrowsNotFoundException()
     {
@@ -98,6 +107,9 @@ public class GetLeaveRequestQueryHandlerTests
         );
     }
     
+    /// <summary>
+    /// LeaveRequestsByUser list success. (get details with RequestingEmployeeId)
+    /// </summary>
     [Fact]
     public async Task Handle_LeaveRequestsByUser_Success()
     {
