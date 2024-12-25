@@ -31,23 +31,26 @@ public class GetLeaveRequestQueryHandlerTests
         _mapper = mapperConfig.CreateMapper();
     }
 
-
     /// <summary>
-    /// GetLeaveRequestList success
+    /// Test retrieving a list of leave requests with details.
     /// </summary>
     [Fact]
     public async Task GetLeaveRequestsWithDetailsTest()
     {
+        // Arrange
         var handler = new GetLeaveRequestListQueryHandler(_mockRepo.Object, _mapper);
 
+        // Act
         var result = await handler.Handle(new GetLeaveRequestListQuery(), CancellationToken.None);
 
-        result.ShouldBeOfType<List<LeaveRequestListDto>>();
-        result.Count.ShouldBe(3);
+        // Assert
+        result.ShouldNotBeNull(); // Ensure result is not null
+        result.ShouldBeOfType<List<LeaveRequestListDto>>(); // Ensure correct type is returned
+        result.Count.ShouldBe(3); // Ensure all 3 mock requests are returned
     }
 
     /// <summary>
-    /// GetLeaveRequestDetail success
+    /// Test retrieving leave request details successfully.
     /// </summary>
     [Fact]
     public async Task Handle_LeaveRequestFound_ReturnsLeaveRequestDetailsDto()
@@ -68,31 +71,30 @@ public class GetLeaveRequestQueryHandlerTests
             StartDate = DateTime.Now,
             EndDate = DateTime.Now.AddDays(5)
         };
+
         _mockRepo.Setup(r => r.GetLeaveRequestWithDetails(leaveRequestId))
             .ReturnsAsync(leaveRequest);
 
         var handler = new GetLeaveRequestDetailQueryHandler(_mockRepo.Object, _mapper);
 
-
         // Act
-        var result = await handler.Handle(new GetLeaveRequestDetailQuery { Id = leaveRequestId },
-            CancellationToken.None);
+        var result = await handler.Handle(new GetLeaveRequestDetailQuery { Id = leaveRequestId }, CancellationToken.None);
 
         // Assert
-        result.ShouldNotBeNull();
-        result.Id.ShouldBe(leaveRequestId);
-        result.LeaveType.Name.ShouldBe(leaveRequest.LeaveType.Name);
-        result.RequestingEmployeeId.ShouldBe(leaveRequest.RequestingEmployeeId);
+        result.ShouldNotBeNull(); // Ensure result is not null
+        result.Id.ShouldBe(leaveRequestId); // Ensure correct ID is returned
+        result.LeaveType.Name.ShouldBe(leaveRequest.LeaveType.Name); // Validate LeaveType
+        result.RequestingEmployeeId.ShouldBe(leaveRequest.RequestingEmployeeId); // Validate RequestingEmployeeId
     }
 
     /// <summary>
-    /// GetLeaveRequestDetail not found exception
+    /// Test NotFoundException for non-existing leave request.
     /// </summary>
     [Fact]
     public async Task Handle_LeaveRequestNotFound_ThrowsNotFoundException()
     {
         // Arrange
-        var leaveRequestId = 10000;
+        var leaveRequestId = 999; // Non-existing ID
         _mockRepo.Setup(r => r.GetLeaveRequestWithDetails(leaveRequestId))
             .ReturnsAsync(() => null);
 
@@ -100,15 +102,13 @@ public class GetLeaveRequestQueryHandlerTests
 
         // Act & Assert
         await Should.ThrowAsync<NotFoundException>(async () =>
-            {
-                await handler.Handle(new GetLeaveRequestDetailQuery { Id = leaveRequestId },
-                    CancellationToken.None);
-            }
-        );
+        {
+            await handler.Handle(new GetLeaveRequestDetailQuery { Id = leaveRequestId }, CancellationToken.None);
+        });
     }
-    
+
     /// <summary>
-    /// LeaveRequestsByUser list success. (get details with RequestingEmployeeId)
+    /// Test retrieving leave requests by user successfully.
     /// </summary>
     [Fact]
     public async Task Handle_LeaveRequestsByUser_Success()
@@ -123,19 +123,38 @@ public class GetLeaveRequestQueryHandlerTests
             CancellationToken.None);
 
         // Assert
-        result.ShouldNotBeNull(); // Ensure the result is not null
-        result.ShouldBeOfType<List<LeaveRequestsByUserDto>>(); // Ensure the correct type is returned
-        result.Count.ShouldBe(2); // Ensure there are exactly 2 items
-        result.All(r => r.RequestingEmployeeId == requestingEmployeeId).ShouldBeTrue(); // Validate all items belong to the given employee
+        result.ShouldNotBeNull(); // Ensure result is not null
+        result.ShouldBeOfType<List<LeaveRequestsByUserDto>>(); // Ensure correct type is returned
+        result.Count.ShouldBe(2); // Ensure exactly 2 requests are returned
+        result.All(r => r.RequestingEmployeeId == requestingEmployeeId).ShouldBeTrue(); // Validate employee ID for all items
 
-        // Additional validation for fields
+        // Additional field validation
         foreach (var leaveRequest in result)
         {
-            leaveRequest.RequestingEmployeeId.ShouldBe(requestingEmployeeId);
+            leaveRequest.RequestingEmployeeId.ShouldBe(requestingEmployeeId); // Validate employee ID
             leaveRequest.LeaveType.ShouldNotBeNull(); // Ensure LeaveType is not null
-            leaveRequest.StartDate.ShouldBeLessThan(leaveRequest.EndDate); // Ensure StartDate is before EndDate
+            leaveRequest.StartDate.ShouldBeLessThan(leaveRequest.EndDate); // Validate date range
         }
     }
 
-    
+    /// <summary>
+    /// Test NotFoundException when no leave requests found for a user.
+    /// </summary>
+    [Fact]
+    public async Task Handle_LeaveRequestsByUser_NotFound_ThrowsNotFoundException()
+    {
+        // Arrange
+        var requestingEmployeeId = "999"; // Non-existing employee ID
+        _mockRepo.Setup(r => r.GetLeaveRequestsWithDetails(requestingEmployeeId))
+            .ReturnsAsync(new List<LeaveRequest>()); // Return an empty list
+
+        var handler = new GetLeaveRequestsByUserQueryHandler(_mockRepo.Object, _mapper);
+
+        // Act & Assert
+        await Should.ThrowAsync<NotFoundException>(async () =>
+        {
+            await handler.Handle(new GetLeaveRequestsByUserQuery { RequestingEmployeeId = requestingEmployeeId },
+                CancellationToken.None);
+        });
+    }
 }
