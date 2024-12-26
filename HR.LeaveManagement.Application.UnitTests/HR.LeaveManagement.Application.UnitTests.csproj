@@ -30,7 +30,6 @@
 
     <ItemGroup>
       <Folder Include="Features\LeaveAllocationd\" />
-      <Folder Include="Features\LeaveRequests\Commands\" />
     </ItemGroup>
 
 </Project>

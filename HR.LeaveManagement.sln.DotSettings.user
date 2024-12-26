@@ -4,27 +4,25 @@
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AGuid_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002Econfig_003FJetBrains_003FRider2024_002E2_003Fresharper_002Dhost_003FDecompilerCache_003Fdecompiler_003Fc87d74c82824421bb59de7f19d0486bdc2d800_003F03_003F4728e6c6_003FGuid_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AILoggerFactory_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002Econfig_003FJetBrains_003FRider2024_002E2_003Fresharper_002Dhost_003FDecompilerCache_003Fdecompiler_003F70b74ebd5e324425ac14c31da41a841b10320_003Fad_003Fec356e70_003FILoggerFactory_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AILogger_00601_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002Econfig_003FJetBrains_003FRider2024_002E2_003Fresharper_002Dhost_003FDecompilerCache_003Fdecompiler_003F70b74ebd5e324425ac14c31da41a841b10320_003Fcf_003F200e66ac_003FILogger_00601_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6657eb6b_002D43aa_002D4d7c_002D8556_002D51cf2eba7a4c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetLeaveTypeListTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AMock_00601_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002Econfig_003FJetBrains_003FRider2024_002E2_003Fresharper_002Dhost_003FDecompilerCache_003Fdecompiler_003F11aa0e509b4c4eeeaed9547dab1ff52b4c400_003Fd4_003F8ce60667_003FMock_00601_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AUnit_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002Econfig_003FJetBrains_003FRider2024_002E2_003Fresharper_002Dhost_003FDecompilerCache_003Fdecompiler_003Fd9de85ef61604c57bb50b8cac968bd371a00_003Fb1_003F917adeef_003FUnit_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=27bbf245_002Da99d_002D4e9c_002Dbb83_002D3cdf17099d29/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Handle_InvalidLeaveType_ThrowsBadRequestException" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveTypes.Queries.GetLeaveTypesQueryHandlerTests.GetLeaveTypeListTest&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::7ADA8B10-D897-4BCF-B400-DB09D013BFF3::net8.0::HR.LeaveManagement.Persistence.IntegrationTests.HrDatabaseContextTests&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveTypes.Commands.CreateLeaveTypeCommandTest&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveTypes.Commands.CreateLeaveTypeCommandTests.Handle_ValidLeaveType&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveTypes.Commands.CreateleaveTypeCommandTests.Handle_ValidLeaveType&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Queries.CreateLeaveTypeCommandTests.Handle_ValidLeaveType&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Queries.GetLeaveRequestQueryHandlerTests.GetLeaveRequestListTest&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Queries.GetLeaveRequestQueryHandlerTests.Handle_RequestingEmployeeId_LeaveRequestDetails_LeaveRequest_Success&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Queries.GetLeaveRequestQueryHandlerTests.Handle_RequestingEmployeeId_LeaveRequest_Success&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Commands.CreateLeaveRequestCommandTests.Handle_InvalidLeaveType_ThrowsBadRequestException&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=736ee344_002Dc14f_002D4359_002D8fdb_002D3e4c56cc64f8/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Handle_ValidLeaveType" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d3842ec7_002Db48b_002D4295_002Daf11_002Dd27edb19c0f1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Handle_InvalidLeaveType_ThrowsBadRequestException #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveTypes.Commands.CreateLeaveTypeCommandTests.Handle_ValidLeaveType&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Queries.GetLeaveRequestQueryHandlerTests.GetLeaveRequestListTest&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveTypes.Queries.GetLeaveTypesQueryHandlerTests.GetLeaveTypeListTest&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Queries.GetLeaveRequestQueryHandlerTests.Mapping_LeaveRequest_To_LeaveRequestListDto_ShouldWork&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Queries.GetLeaveRequestQueryHandlerTests.Handle_LeaveRequestFound_ReturnsLeaveRequestDetailsDto&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Queries.GetLeaveRequestQueryHandlerTests.Handle_LeaveRequestNotFound_ThrowsNotFoundException&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Queries.GetLeaveRequestQueryHandlerTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Commands.CreateLeaveRequestCommandTests.Handle_InvalidLeaveType_ThrowsBadRequestException&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Commands.CreateLeaveRequestCommandTests.Handle_InvalidCommandValidation_ThrowsBadRequestException&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
-&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=de1c80cb_002Dc863_002D4bf6_002Da9c8_002Ddbb6c62406a6/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Handle_InvalidCommandValidation_ThrowsBadRequestException" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Commands.CreateLeaveRequestCommandTests.Handle_InvalidCommandValidation_ThrowsBadRequestException&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	
+	
+	
+	</wpf:ResourceDictionary>
