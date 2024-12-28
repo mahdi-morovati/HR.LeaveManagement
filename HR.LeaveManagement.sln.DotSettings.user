@@ -11,15 +11,17 @@
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Commands.CreateLeaveRequestCommandTests.Handle_InvalidLeaveType_ThrowsBadRequestException&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d3842ec7_002Db48b_002D4295_002Daf11_002Dd27edb19c0f1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Handle_InvalidLeaveType_ThrowsBadRequestException #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d3842ec7_002Db48b_002D4295_002Daf11_002Dd27edb19c0f1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Handle_InvalidLeaveType_ThrowsBadRequestException #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Commands.CreateLeaveRequestCommandTests.Handle_InvalidLeaveType_ThrowsBadRequestException&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Commands.CreateLeaveRequestCommandTests.Handle_InvalidCommandValidation_ThrowsBadRequestException&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Queries.GetLeaveRequestQueryHandlerTests.Handle_LeaveRequestFound_ReturnsLeaveRequestDetailsDto_FromMockRepoData&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=de1c80cb_002Dc863_002D4bf6_002Da9c8_002Ddbb6c62406a6/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Handle_InvalidCommandValidation_ThrowsBadRequestException" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=de1c80cb_002Dc863_002D4bf6_002Da9c8_002Ddbb6c62406a6/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Handle_InvalidCommandValidation_ThrowsBadRequestException" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Commands.CreateLeaveRequestCommandTests.Handle_InvalidCommandValidation_ThrowsBadRequestException&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Queries.GetLeaveRequestQueryHandlerTests.Handle_LeaveRequestFound_ReturnsLeaveRequestDetailsDto_FromMockRepoData&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	

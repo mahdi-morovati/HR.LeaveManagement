@@ -86,6 +86,33 @@ public class GetLeaveRequestQueryHandlerTests
         result.LeaveType.Name.ShouldBe(leaveRequest.LeaveType.Name); // Validate LeaveType
         result.RequestingEmployeeId.ShouldBe(leaveRequest.RequestingEmployeeId); // Validate RequestingEmployeeId
     }
+    
+    /// <summary>
+    /// this is a refactor of Handle_LeaveRequestFound_ReturnsLeaveRequestDetailsDto method.
+    /// in this method used the _mockRepo default data. (_mockRepo leaveRequest)
+    /// </summary>
+    [Fact]
+    public async Task Handle_LeaveRequestFound_ReturnsLeaveRequestDetailsDto_FromMockRepoData()
+    {
+        // Arrange
+        // ما می‌دانیم در MockLeaveRequestRepository یک LeaveRequest با Id=1 داریم
+        var leaveRequestId = 1;
+
+        // Since Mock default data is enough،
+        // No need _mockRepo.setup (...) again.
+        var handler = new GetLeaveRequestDetailQueryHandler(_mockRepo.Object, _mapper);
+
+        // Act
+        var result = await handler.Handle(new GetLeaveRequestDetailQuery { Id = leaveRequestId }, CancellationToken.None);
+
+        // Assert
+        result.ShouldNotBeNull();
+        result.Id.ShouldBe(leaveRequestId);
+        result.LeaveType.ShouldNotBeNull();
+        result.LeaveType.Name.ShouldBe("Vacation");
+        result.RequestingEmployeeId.ShouldBe("1");
+    }
+
 
     /// <summary>
     /// Test NotFoundException for non-existing leave request.
