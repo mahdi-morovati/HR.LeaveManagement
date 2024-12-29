@@ -108,7 +108,7 @@ public class UpdateLeaveRequestCommandTests
     }
     
     
-    public static class UpdateLeaveRequestTestData
+    private static class UpdateLeaveRequestTestData
     {
         public static IEnumerable<object[]> InvalidLeaveRequestData =>
             new List<object[]>
