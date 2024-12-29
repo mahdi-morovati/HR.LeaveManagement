@@ -11,7 +11,7 @@ public class BaseLeaveRequestValidator : AbstractValidator<BaseLeaveRequest>
     {
         RuleFor(p => p.StartDate)
             .LessThan(p => p.EndDate)
-            .WithMessage("{propertyName} must be before than {ComparisonValue}");
+            .WithMessage("{PropertyName} must be before {ComparisonValue}");
 
         RuleFor(p => p.EndDate)
             .GreaterThan(p => p.StartDate)
@@ -20,7 +20,7 @@ public class BaseLeaveRequestValidator : AbstractValidator<BaseLeaveRequest>
         RuleFor(p => p.LeaveTypeId)
             .GreaterThan(0)
             .MustAsync(LeaveTypeMustExist)
-            .WithMessage("{PropertyName} does not exist");
+            .WithMessage("{PropertyName} does not exist.");
 
         _leaveTypeRepository = leaveTypeRepository;
     }

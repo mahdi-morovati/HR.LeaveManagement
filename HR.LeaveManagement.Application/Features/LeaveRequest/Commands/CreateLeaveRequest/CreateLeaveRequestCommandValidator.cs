@@ -12,5 +12,10 @@ public class CreateLeaveRequestCommandValidator : AbstractValidator<CreateLeaveR
     {
         _leaveTypeRepository = leaveTypeRepository;
         Include(new BaseLeaveRequestValidator(_leaveTypeRepository));
+        
+        RuleFor(p => p.RequestComments)
+            .NotEmpty().WithMessage("{PropertyName} is required")
+            .NotNull()
+            .MaximumLength(500).WithMessage("{PropertyName} must be fewer than 500 characters");
     }
 }
