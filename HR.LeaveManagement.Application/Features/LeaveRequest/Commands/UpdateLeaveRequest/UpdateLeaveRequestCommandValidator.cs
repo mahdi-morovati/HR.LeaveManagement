@@ -14,15 +14,16 @@ public class UpdateLeaveRequestCommandValidator : AbstractValidator<UpdateLeaveR
         _leaveRequestRepository = leaveRequestRepository;
         Include(new BaseLeaveRequestValidator(_leaveTypeRepository));
         
+        RuleFor(p => p.Id)
+            .GreaterThan(0)
+            .MustAsync(async (id, token) => await LeaveRequestMustExist(id, token))
+            .WithMessage("{PropertyName} does not exist.");
+        
         RuleFor(p => p.RequestComments)
            .NotEmpty().WithMessage("{PropertyName} is required")
            .NotNull()
            .MaximumLength(500).WithMessage("{PropertyName} must be fewer than 500 characters");
         
-        RuleFor(p => p.Id)
-           .GreaterThan(0)
-           .MustAsync(async (id, token) => await LeaveRequestMustExist(id, token))
-           .WithMessage("{PropertyName} does not exist.");
     }
 
     private Task<bool> LeaveRequestMustExist(int id, CancellationToken token)
