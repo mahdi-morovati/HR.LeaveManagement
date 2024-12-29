@@ -28,7 +28,8 @@ public class UpdateLeaveRequestCommandHandler : IRequestHandler<UpdateLeaveReque
         var validationResult = await validator.ValidateAsync(request);
         if (validationResult.Errors.Any())
         {
-            _logger.LogWarning("Validation errors in update request for {0} - {1}", nameof(LeaveRequest), request.Id);
+            // _logger.LogWarning("Validation errors in update request for {0} - {1}", nameof(LeaveRequest), request.Id);
+            _logger.LogWarning("Validation errors in update request: {Errors}", validationResult.Errors);
             throw new BadRequestException("Invalid Leave Request", validationResult);
         }
 

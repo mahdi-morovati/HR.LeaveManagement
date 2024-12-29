@@ -24,6 +24,8 @@ public class UpdateLeaveRequestCommandTests
     public UpdateLeaveRequestCommandTests()
     {
         _appLogger = new Mock<IAppLogger<UpdateLeaveRequestCommandValidator>>();
+        _appLogger.Setup(logger => logger.LogWarning(It.IsAny<string>(), It.IsAny<object[]>()));
+
         _mockRepo = MockLeaveRequestRepository.GetMockLeaveRequestRepository();
         _mockLeaveTypeRepo = MockLeaveTypeRepository.GetMockLeaveTypeRepository();
 
@@ -100,7 +102,9 @@ public class UpdateLeaveRequestCommandTests
         
         exception.Message.ShouldBe(expectedExceptionMessage);
         exception.ValidationErrors.ShouldContain(v => v.ErrorMessage.Contains(errorMessage));
-
+        
+        _appLogger.Verify(logger => logger.LogWarning(It.IsAny<string>(), It.IsAny<object[]>()), Times.AtLeastOnce);
+        
     }
     
     
