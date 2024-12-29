@@ -74,6 +74,8 @@ public class MockLeaveRequestRepository
         
         mockRepo.Setup(r => r.ExistsByIdAsync(It.IsAny<int>()))
             .ReturnsAsync((int id) => leaveRequests.Any(lr => lr.Id == id));
+        mockRepo.Setup(r => r.GetByIdAsync(It.IsAny<int>()))
+            .ReturnsAsync((int id) => leaveRequests.FirstOrDefault(lt => lt.Id == id));
 
 
         return mockRepo;
