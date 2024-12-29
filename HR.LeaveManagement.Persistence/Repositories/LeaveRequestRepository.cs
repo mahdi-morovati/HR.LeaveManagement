@@ -33,4 +33,9 @@ public class LeaveRequestRepository : GenericRepository<LeaveRequest>, ILeaveReq
             .Include(q => q.LeaveType)
             .ToListAsync();
     }
+
+    public Task<bool> ExistsByIdAsync(int id)
+    {
+        return Context.LeaveRequests.AnyAsync(q => q.Id == id);
+    }
 }
