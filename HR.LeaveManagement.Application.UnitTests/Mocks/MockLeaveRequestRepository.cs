@@ -71,6 +71,9 @@ public class MockLeaveRequestRepository
         // setup GetLeaveRequestsWithDetails(string userId)
         mockRepo.Setup(r => r.GetLeaveRequestsWithDetails(It.IsAny<string>()))
             .ReturnsAsync((string userId) => leaveRequests.Where(lr => lr.RequestingEmployeeId == userId).ToList());
+        
+        mockRepo.Setup(r => r.ExistsByIdAsync(It.IsAny<int>()))
+            .ReturnsAsync((int id) => leaveRequests.Any(lr => lr.Id == id));
 
 
         return mockRepo;

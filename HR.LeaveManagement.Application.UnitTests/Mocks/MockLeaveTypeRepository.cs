@@ -43,6 +43,10 @@ public class MockLeaveTypeRepository
         
         mockRepo.Setup(r => r.IsLeaveTypeUnique(It.IsAny<string>()))
             .ReturnsAsync((string name) => !leaveTypes.Any(x => x.Name == name));
+        
+        mockRepo.Setup(r => r.GetByIdAsync(It.IsAny<int>()))
+            .ReturnsAsync((int id) => leaveTypes.FirstOrDefault(lt => lt.Id == id));
+
 
 
         return mockRepo;
