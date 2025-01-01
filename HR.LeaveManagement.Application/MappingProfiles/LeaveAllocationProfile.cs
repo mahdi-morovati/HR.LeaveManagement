@@ -1,4 +1,5 @@
 using AutoMapper;
+using HR.LeaveManagement.Application.Features.LeaveAllocation.Queries.GetLeaveAllocationDetails;
 using HR.LeaveManagement.Application.Features.LeaveAllocation.Queries.GetLeaveAllocations;
 using HR.LeaveManagement.Domain;
 
@@ -9,6 +10,6 @@ public class LeaveAllocationProfile : Profile
     public LeaveAllocationProfile()
     {
         CreateMap<LeaveAllocationDto, LeaveAllocation>().ReverseMap();
-        
+        CreateMap<LeaveAllocation, LeaveAllocationDetailsDto>();
     }
 }
