@@ -18,7 +18,6 @@ public class ChangeLeaveRequestApprovalCommandTests
     private readonly Mock<ILeaveRequestRepository> _mockRepo;
     private readonly IMapper _mapper;
     private readonly Mock<IAppLogger<ChangeLeaveRequestApprovalCommandValidator>> _appLogger;
-    private static readonly string LongRequestComment = new string('x', 501);
 
 
     public ChangeLeaveRequestApprovalCommandTests()
@@ -67,9 +66,7 @@ public class ChangeLeaveRequestApprovalCommandTests
             Approved = true
         };
         
-        // Act
-        // Assert
-
+        // Act && Assert
         
         var exception = await Should.ThrowAsync<NotFoundException>(() => handler.Handle(command, CancellationToken.None));
         
