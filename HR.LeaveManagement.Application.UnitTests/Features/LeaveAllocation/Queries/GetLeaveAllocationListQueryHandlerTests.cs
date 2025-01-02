@@ -7,7 +7,7 @@ using Moq;
 using Shouldly;
 using Xunit;
 
-namespace HR.LeaveManagement.Application.UnitTests.Features.LeaveAllocationd.Queries;
+namespace HR.LeaveManagement.Application.UnitTests.Features.LeaveAllocation.Queries;
 
 public class GetLeaveAllocationListQueryHandlerTests
 {

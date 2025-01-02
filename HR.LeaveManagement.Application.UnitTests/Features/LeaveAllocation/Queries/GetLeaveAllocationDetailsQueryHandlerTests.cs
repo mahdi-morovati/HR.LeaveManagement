@@ -2,14 +2,13 @@ using AutoMapper;
 using HR.LeaveManagement.Application.Contracts.Persistence;
 using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Features.LeaveAllocation.Queries.GetLeaveAllocationDetails;
-using HR.LeaveManagement.Application.Features.LeaveAllocation.Queries.GetLeaveAllocations;
 using HR.LeaveManagement.Application.MappingProfiles;
 using HR.LeaveManagement.Application.UnitTests.Mocks;
 using Moq;
 using Shouldly;
 using Xunit;
 
-namespace HR.LeaveManagement.Application.UnitTests.Features.LeaveAllocationd.Queries;
+namespace HR.LeaveManagement.Application.UnitTests.Features.LeaveAllocation.Queries;
 
 public class GetLeaveAllocationDetailsQueryHandlerTests
 {

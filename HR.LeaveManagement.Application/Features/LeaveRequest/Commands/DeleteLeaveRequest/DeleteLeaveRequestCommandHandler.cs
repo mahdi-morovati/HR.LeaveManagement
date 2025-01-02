@@ -4,7 +4,7 @@ using MediatR;
 
 namespace HR.LeaveManagement.Application.Features.LeaveRequest.Commands.DeleteLeaveRequest;
 
-public class DeleteLeaveRequestCommandHandler
+public class DeleteLeaveRequestCommandHandler : IRequestHandler<DeleteLeaveRequestCommand, Unit>
 {
     private readonly ILeaveRequestRepository _leaveRequestRepository;
 
@@ -13,7 +13,7 @@ public class DeleteLeaveRequestCommandHandler
         _leaveRequestRepository = leaveRequestRepository;
     }
 
-    public async Task<object> Handle(DeleteLeaveRequestCommand request, CancellationToken none)
+    public async Task<Unit> Handle(DeleteLeaveRequestCommand request, CancellationToken none)
     {
         // Retrieve the entity
         var leaveRequest = await _leaveRequestRepository.GetByIdAsync(request.Id);

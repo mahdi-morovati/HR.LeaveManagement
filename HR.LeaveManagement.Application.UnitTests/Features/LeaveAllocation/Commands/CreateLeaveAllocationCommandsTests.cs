@@ -4,13 +4,12 @@ using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Features.LeaveAllocation.Commands.CreateLeaveAllocation;
 using HR.LeaveManagement.Application.MappingProfiles;
 using HR.LeaveManagement.Application.UnitTests.Mocks;
-using HR.LeaveManagement.Domain;
 using MediatR;
 using Moq;
 using Shouldly;
 using Xunit;
 
-namespace HR.LeaveManagement.Application.UnitTests.Features.LeaveAllocationd.Commands;
+namespace HR.LeaveManagement.Application.UnitTests.Features.LeaveAllocation.Commands;
 
 public class CreateLeaveAllocationCommandsTests
 {
@@ -53,7 +52,7 @@ public class CreateLeaveAllocationCommandsTests
         
         // Assert
         result.ShouldBe(Unit.Value);
-        _mockRepo.Verify(repo => repo.CreateAsync(It.IsAny<LeaveAllocation>()), Times.Once);
+        _mockRepo.Verify(repo => repo.CreateAsync(It.IsAny<Domain.LeaveAllocation>()), Times.Once);
     }
 
     [Fact]
@@ -73,7 +72,7 @@ public class CreateLeaveAllocationCommandsTests
         // Assert
         exception.Message.ShouldBe("Invalid Leave Allocation");
         
-        _mockRepo.Verify(repo => repo.CreateAsync(It.IsAny<LeaveAllocation>()), Times.Never);
+        _mockRepo.Verify(repo => repo.CreateAsync(It.IsAny<Domain.LeaveAllocation>()), Times.Never);
         
         exception.ValidationErrors
             .Any(error => error.PropertyName == "LeaveTypeId" && error.ErrorMessage.Contains("does not exist."))
