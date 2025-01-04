@@ -1,6 +1,8 @@
+using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Features.LeaveRequest.Commands.UpdateLeaveRequest;
 using HR.LeaveManagement.Application.Features.LeaveType.Commands.CreateLeaveType;
 using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetAllLeaveTypes;
+using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetLeaveTypeDetails;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,9 +31,17 @@ public class LeaveTypesController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<LeaveTypeDto>> Get(int id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var leaveType = await _mediator.Send(new GetLeaveTypeDetailsQuery(id));
+            return Ok(leaveType);
+        }
+        catch (NotFoundException e)
+        {
+            return NotFound();
+        }
     }
-    
+
     // POST: api/[LeaveTypesController]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
@@ -41,7 +51,7 @@ public class LeaveTypesController : ControllerBase
     {
         throw new NotImplementedException();
     }
-    
+
     // PUT: api/[LeaveTypesController]/5
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -52,7 +62,7 @@ public class LeaveTypesController : ControllerBase
     {
         throw new NotImplementedException();
     }
-    
+
     // DELETE: api/[LeaveTypesController]/5
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -62,5 +72,4 @@ public class LeaveTypesController : ControllerBase
     {
         throw new NotImplementedException();
     }
-
 }

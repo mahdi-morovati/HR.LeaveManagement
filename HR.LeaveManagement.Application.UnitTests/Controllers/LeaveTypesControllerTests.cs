@@ -3,6 +3,7 @@ using HR.LeaveManagement.Api.Controllers;
 using HR.LeaveManagement.Application.Contracts.Persistence;
 using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetAllLeaveTypes;
+using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetLeaveTypeDetails;
 using HR.LeaveManagement.Application.MappingProfiles;
 using HR.LeaveManagement.Application.UnitTests.Mocks;
 using HR.LeaveManagement.Domain;
@@ -58,6 +59,62 @@ public class LeaveTypesControllerTests
         // verify Mediator call
         _mockMediator.Verify(m => m.Send(It.IsAny<GetLeaveTypesQuery>(), CancellationToken.None), Times.Once);
     }
+
+    [Fact]
+    public async Task Get_WithId_ReturnsLeaveType()
+    {
+        // Arrange
+        var leaveTypeId = 1; // Valid ID
+        var mockLeaveType = await _mockRepo.Object.GetByIdAsync(leaveTypeId);
+        
+        // _mockMediator.Setup(m => m.Send(It.Is<GetLeaveTypeDetailsQuery>(q => q.Id == leaveTypeId), CancellationToken.None))
+        //    .ReturnsAsync(_mapper.Map<LeaveTypeDetailsDto>(mockLeaveType));
+        SetupMockMediatorForLeaveType(leaveTypeId, mockLeaveType);
+        
+        // Act
+        var result = await _leaveTypesController.Get(leaveTypeId);
+
+        // Assert
+        var okResult = result.Result as OkObjectResult;
+        okResult.ShouldNotBeNull();
+        okResult.StatusCode.ShouldBe(StatusCodes.Status200OK);
+        
+        var leaveType = okResult.Value as LeaveTypeDetailsDto;
+        leaveType.ShouldNotBeNull();
+        leaveType.Id.ShouldBe(leaveTypeId);
+        leaveType.Name.ShouldBe(mockLeaveType.Name);
+        leaveType.DefaultDays.ShouldBe(mockLeaveType.DefaultDays);
+        
+        // verify Mediator is called
+        _mockMediator.Verify(m => m.Send(It.IsAny<GetLeaveTypeDetailsQuery>(), CancellationToken.None));
+    }
+
+    [Fact]
+    public async Task Get_WithInvalidId_ReturnsNotFound()
+    {
+        // Arrange
+        var invalidLeaveTypeId = 0; // Invalid ID
+        
+        _mockMediator.Setup(m => m.Send(It.Is<GetLeaveTypeDetailsQuery>(q => q.Id == invalidLeaveTypeId), CancellationToken.None))
+           .ThrowsAsync(new NotFoundException(nameof(LeaveType), invalidLeaveTypeId));
+        
+        // Act
+        var result = await _leaveTypesController.Get(invalidLeaveTypeId);
+
+        // Assert
+        var notFoundResult = result.Result as NotFoundResult;
+        notFoundResult.ShouldNotBeNull();
+        notFoundResult.StatusCode.ShouldBe(StatusCodes.Status404NotFound);
+        
+        // verify Mediator is called
+        _mockMediator.Verify(m => m.Send(It.Is<GetLeaveTypeDetailsQuery>(q => q.Id == invalidLeaveTypeId), CancellationToken.None), Times.Once);
+    }
     
-    
+    private void SetupMockMediatorForLeaveType(int leaveTypeId, LeaveType leaveType)
+    {
+        _mockMediator.Setup(m => m.Send(It.Is<GetLeaveTypeDetailsQuery>(q => q.Id == leaveTypeId), CancellationToken.None))
+            .ReturnsAsync(_mapper.Map<LeaveTypeDetailsDto>(leaveType));
+    }
+
+
 }
