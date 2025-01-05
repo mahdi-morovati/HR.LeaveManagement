@@ -33,6 +33,7 @@
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveAllocationd.Commands.CreateLeaveAllocationCommandsTests&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveAllocationd.Commands.DeleteLeaveAllocationCommandTests&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveAllocation.Commands.UpdateLeaveAllocationCommandTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Controllers.LeaveTypesControllerTests.Post_ValidCommand_ReturnsCreatedResult&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=df42f9e3_002D4c72_002D4f0b_002Dbd9d_002D40530f32c33a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Handle_InvalidLeaveRequest_ThrowsBadRequestException" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;

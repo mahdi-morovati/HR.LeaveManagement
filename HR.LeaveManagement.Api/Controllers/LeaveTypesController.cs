@@ -1,3 +1,4 @@
+using FluentValidation;
 using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Features.LeaveRequest.Commands.UpdateLeaveRequest;
 using HR.LeaveManagement.Application.Features.LeaveType.Commands.CreateLeaveType;
@@ -49,7 +50,20 @@ public class LeaveTypesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> Post(CreateLeaveTypeCommand leaveType)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var response = await _mediator.Send(leaveType);
+            var result = new { id = response, message = "Leave type created successfully" };
+            return CreatedAtAction(nameof(Get), new { id = response }, result);
+        }
+        catch (BadRequestException ex)
+        {
+            return BadRequest(ex.ValidationErrors);
+        }
+        catch (NotFoundException ex)
+        {
+            return NotFound();
+        }
     }
 
     // PUT: api/[LeaveTypesController]/5

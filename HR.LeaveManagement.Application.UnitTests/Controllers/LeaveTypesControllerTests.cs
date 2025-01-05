@@ -2,6 +2,7 @@ using AutoMapper;
 using HR.LeaveManagement.Api.Controllers;
 using HR.LeaveManagement.Application.Contracts.Persistence;
 using HR.LeaveManagement.Application.Exceptions;
+using HR.LeaveManagement.Application.Features.LeaveType.Commands.CreateLeaveType;
 using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetAllLeaveTypes;
 using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetLeaveTypeDetails;
 using HR.LeaveManagement.Application.MappingProfiles;
@@ -114,6 +115,34 @@ public class LeaveTypesControllerTests
     {
         _mockMediator.Setup(m => m.Send(It.Is<GetLeaveTypeDetailsQuery>(q => q.Id == leaveTypeId), CancellationToken.None))
             .ReturnsAsync(_mapper.Map<LeaveTypeDetailsDto>(leaveType));
+    }
+
+    [Fact]
+    public async Task Post_ValidCommand_ReturnsCreatedResult()
+    {
+        // Arrange
+        var createCommand = new CreateLeaveTypeCommand
+        {
+            Name = "New Leave Type",
+            DefaultDays = 10
+        };
+
+        _mockMediator.Setup(m => m.Send(It.IsAny<CreateLeaveTypeCommand>(), CancellationToken.None))
+            .ReturnsAsync(1); // Assume the created ID is 1
+
+        // Act
+        var result = await _leaveTypesController.Post(createCommand);
+
+        // Assert
+        var createdResult = result as CreatedAtActionResult;
+        createdResult.ShouldNotBeNull();
+        createdResult.StatusCode.ShouldBe(StatusCodes.Status201Created);
+        createdResult.ActionName.ShouldBe("Get");
+        // Check Value if RouteValues is not populated
+        createdResult.RouteValues["id"].ShouldNotBeNull();
+        createdResult.RouteValues["id"].ShouldBe(1); // Check RouteValues
+        
+        
     }
 
 
