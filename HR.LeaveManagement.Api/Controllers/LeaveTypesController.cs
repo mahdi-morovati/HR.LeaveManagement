@@ -2,6 +2,7 @@ using FluentValidation;
 using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Features.LeaveRequest.Commands.UpdateLeaveRequest;
 using HR.LeaveManagement.Application.Features.LeaveType.Commands.CreateLeaveType;
+using HR.LeaveManagement.Application.Features.LeaveType.Commands.UpdateLeaveType;
 using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetAllLeaveTypes;
 using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetLeaveTypeDetails;
 using MediatR;
@@ -64,6 +65,10 @@ public class LeaveTypesController : ControllerBase
         {
             return NotFound();
         }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred.");
+        }
     }
 
     // PUT: api/[LeaveTypesController]/5
@@ -72,9 +77,25 @@ public class LeaveTypesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesDefaultResponseType]
-    public async Task<ActionResult> Put(UpdateLeaveRequestCommand levaeType)
+    public async Task<ActionResult> Put(UpdateLeaveTypeCommand leaveType)
     {
-        throw new NotImplementedException();
+        try
+        {
+            await _mediator.Send(leaveType);
+            return NoContent();
+        }
+        catch (BadRequestException e)
+        {
+            return BadRequest(e.ValidationErrors);
+        }
+        catch (NotFoundException ex)
+        {
+            return NotFound();
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred.");
+        }
     }
 
     // DELETE: api/[LeaveTypesController]/5
