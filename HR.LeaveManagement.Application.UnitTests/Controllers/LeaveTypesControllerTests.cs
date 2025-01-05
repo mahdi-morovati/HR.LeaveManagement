@@ -5,6 +5,7 @@ using HR.LeaveManagement.Application.Contracts.Persistence;
 using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Features.LeaveRequest.Commands.UpdateLeaveRequest;
 using HR.LeaveManagement.Application.Features.LeaveType.Commands.CreateLeaveType;
+using HR.LeaveManagement.Application.Features.LeaveType.Commands.DeleteLeaveType;
 using HR.LeaveManagement.Application.Features.LeaveType.Commands.UpdateLeaveType;
 using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetAllLeaveTypes;
 using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetLeaveTypeDetails;
@@ -326,4 +327,71 @@ public class LeaveTypesControllerTests
         internalServerErrorResult.StatusCode.ShouldBe(StatusCodes.Status500InternalServerError);
         internalServerErrorResult.Value.ShouldBe("An unexpected error occurred.");
     }
+    
+    
+    [Fact]
+    public async Task Delete_ValidId_ReturnsNoContent()
+    {
+        // Arrange
+        var validId = 1;
+
+        _mockMediator.Setup(m => m.Send(It.IsAny<DeleteLeaveTypeCommand>(), CancellationToken.None))
+            .ReturnsAsync(Unit.Value);
+
+        // Act
+        var result = await _leaveTypesController.Delete(validId);
+
+        // Assert
+        var noContentResult = result as NoContentResult;
+        noContentResult.ShouldNotBeNull();
+        noContentResult.StatusCode.ShouldBe(StatusCodes.Status204NoContent);
+
+        // Verify Mediator call
+        _mockMediator.Verify(m => m.Send(It.Is<DeleteLeaveTypeCommand>(c => c.Id == validId), CancellationToken.None), Times.Once);
+    }
+    
+    [Fact]
+    public async Task Delete_InvalidId_ReturnsNotFound()
+    {
+        // Arrange
+        var invalidId = 99;
+
+        _mockMediator.Setup(m => m.Send(It.IsAny<DeleteLeaveTypeCommand>(), CancellationToken.None))
+            .ThrowsAsync(new NotFoundException(nameof(LeaveType), invalidId));
+
+        // Act
+        var result = await _leaveTypesController.Delete(invalidId);
+
+        // Assert
+        var notFoundResult = result as NotFoundResult;
+        notFoundResult.ShouldNotBeNull();
+        notFoundResult.StatusCode.ShouldBe(StatusCodes.Status404NotFound);
+
+        // Verify Mediator call
+        _mockMediator.Verify(m => m.Send(It.Is<DeleteLeaveTypeCommand>(c => c.Id == invalidId), CancellationToken.None), Times.Once);
+    }
+
+    [Fact]
+    public async Task Delete_UnexpectedError_ReturnsInternalServerError()
+    {
+        // Arrange
+        var validId = 1;
+
+        _mockMediator.Setup(m => m.Send(It.IsAny<DeleteLeaveTypeCommand>(), CancellationToken.None))
+            .ThrowsAsync(new Exception("Unexpected error"));
+
+        // Act
+        var result = await _leaveTypesController.Delete(validId);
+
+        // Assert
+        var internalServerErrorResult = result as ObjectResult;
+        internalServerErrorResult.ShouldNotBeNull();
+        internalServerErrorResult.StatusCode.ShouldBe(StatusCodes.Status500InternalServerError);
+        internalServerErrorResult.Value.ShouldBe("An unexpected error occurred.");
+
+        // Verify Mediator call
+        _mockMediator.Verify(m => m.Send(It.Is<DeleteLeaveTypeCommand>(c => c.Id == validId), CancellationToken.None), Times.Once);
+    }
+
+
 }
