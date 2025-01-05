@@ -34,4 +34,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.MapControllers(); // active controller routes
+
 app.Run();
