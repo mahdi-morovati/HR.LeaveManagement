@@ -9,6 +9,8 @@ builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddPersistenceServices(builder.Configuration);
 
+builder.Services.AddControllers();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("all", builder => builder.AllowAnyOrigin()
