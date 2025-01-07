@@ -29,7 +29,9 @@ public class LeaveAllocationsControllerTests
         var mapperConfig = new MapperConfiguration(c =>
         {
             c.AddProfile<LeaveAllocationProfile>();
+            c.AddProfile<LeaveTypeProfile>();
         });
+        _mapper = mapperConfig.CreateMapper();
     }
 
     [Fact]

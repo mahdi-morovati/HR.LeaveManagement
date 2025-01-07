@@ -20,7 +20,7 @@
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Controllers.LeaveTypesControllerTests.Get_ShouldReturnListOfLeaveTypes&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b7a6d8b9_002D582e_002D4e50_002Da350_002D55cb183a735e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Handle_ValidRequest_UpdatesLeaveRequest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b7a6d8b9_002D582e_002D4e50_002Da350_002D55cb183a735e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Handle_ValidRequest_UpdatesLeaveRequest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Commands.UpdateLeaveRequestCommandTests&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Commands.DeleteLeaveRequestCommandTests&lt;/TestId&gt;
@@ -34,9 +34,10 @@
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveAllocationd.Commands.DeleteLeaveAllocationCommandTests&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveAllocation.Commands.UpdateLeaveAllocationCommandTests&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Controllers.LeaveTypesControllerTests.Post_ValidCommand_ReturnsCreatedResult&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Controllers.LeaveAllocationsControllerTests.Get_ShouldReturnLeaveAllocations&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=df42f9e3_002D4c72_002D4f0b_002Dbd9d_002D40530f32c33a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Handle_InvalidLeaveRequest_ThrowsBadRequestException" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=df42f9e3_002D4c72_002D4f0b_002Dbd9d_002D40530f32c33a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Handle_InvalidLeaveRequest_ThrowsBadRequestException" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Commands.UpdateLeaveRequestCommandTests.Handle_InvalidLeaveRequest_ThrowsBadRequestException&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Features.LeaveRequests.Commands.ChangeLeaveRequestApprovalCommandTests.Handle_InvalidRequest_ThrowsBadRequestException&lt;/TestId&gt;
@@ -49,6 +50,7 @@
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Controllers.LeaveTypesControllerTests.Get_WithId_ReturnsLeaveType&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Controllers.LeaveTypesControllerTests.Get_WithInvalidId_ReturnsNotFound&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Controllers.LeaveTypesControllerTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::1CF929D8-A723-4D97-B409-FBCF82FD7456::net8.0::HR.LeaveManagement.Application.UnitTests.Controllers.LeaveAllocationsControllerTests.Get_ShouldReturnLeaveAllocations&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	
