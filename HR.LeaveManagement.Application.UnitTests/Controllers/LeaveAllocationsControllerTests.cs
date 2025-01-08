@@ -1,6 +1,7 @@
 using AutoMapper;
 using HR.LeaveManagement.Api.Controllers;
 using HR.LeaveManagement.Application.Contracts.Persistence;
+using HR.LeaveManagement.Application.Features.LeaveAllocation.Commands.CreateLeaveAllocation;
 using HR.LeaveManagement.Application.Features.LeaveAllocation.Queries.GetLeaveAllocationDetails;
 using HR.LeaveManagement.Application.Features.LeaveAllocation.Queries.GetLeaveAllocations;
 using HR.LeaveManagement.Application.MappingProfiles;
@@ -85,6 +86,32 @@ public class LeaveAllocationsControllerTests
 
         // Verify Mediator call
         _mockMediator.Verify(m => m.Send(It.Is<GetLeaveAllocationDetailsQuery>(q => q.Id == leaveAllocationId), CancellationToken.None), Times.Once);
+    }
+
+    [Fact]
+    public async Task Post_ValidCommand_ReturnsCreateResult()
+    {
+        // Arrange
+        var createCommand = new CreateLeaveAllocationCommand
+        {
+            LeaveTypeId = 1
+        };
+        _mockMediator.Setup(m => m.Send(It.IsAny<CreateLeaveAllocationCommand>(), CancellationToken.None))
+            .ReturnsAsync(Unit.Value);
+        
+        // Act
+        var result = await _leaveAllocationsController.Post(createCommand);
+
+        // Assert
+        var createResult = result as CreatedAtActionResult;
+        createResult.ShouldNotBeNull();
+        createResult.StatusCode.ShouldBe(StatusCodes.Status201Created);
+        createResult.ActionName.ShouldBe("Get");
+        createResult.RouteValues["id"].ShouldNotBeNull();
+        createResult.RouteValues["id"].ShouldBe(Unit.Value);
+        
+        _mockMediator.Verify(m => m.Send(It.IsAny<CreateLeaveAllocationCommand>(), CancellationToken.None), Times.Once);
+
     }
 
 }

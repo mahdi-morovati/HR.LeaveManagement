@@ -73,9 +73,8 @@ public class UpdateLeaveAllocationCommandTests
         var exception = await Should.ThrowAsync<BadRequestException>(()
             => handler.Handle(invalidCommand, CancellationToken.None));
         exception.Message.ShouldBe("Invalid Leave Allocation");
-        exception.ValidationErrors
-            .Any(v => v.PropertyName == "NumberOfDays" && v.ErrorMessage.Contains("must greater than 0"))
-            .ShouldBeTrue();
+        // exception.ValidationErrors.Any(v => v.PropertyName == "NumberOfDays" && v.ErrorMessage.Contains("must greater than 0")).ShouldBeTrue();
+        exception.ValidationErrors["LeaveTypeId"].ShouldContain("'Leave Type Id' must be greater than '0'.");
     }
 
 

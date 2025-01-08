@@ -1,3 +1,4 @@
+using HR.LeaveManagement.Application.Features.LeaveAllocation.Commands.CreateLeaveAllocation;
 using HR.LeaveManagement.Application.Features.LeaveAllocation.Queries.GetLeaveAllocationDetails;
 using HR.LeaveManagement.Application.Features.LeaveAllocation.Queries.GetLeaveAllocations;
 using MediatR;
@@ -30,5 +31,14 @@ public class LeaveAllocationsController : ControllerBase
     {
         var leaveAllocation = await _mediator.Send(new GetLeaveAllocationDetailsQuery() { Id = id });
         return Ok(leaveAllocation);
+    }
+
+    // POST: api/[LeaveAllocationsController]
+    [HttpPost]
+    public async Task<ActionResult> Post(CreateLeaveAllocationCommand leaveAllocation)
+    {
+        var response = await _mediator.Send(leaveAllocation);
+        var result = new { Id = response, message = "Leave Allocation created successfully" };
+        return CreatedAtAction(nameof(Get), new { id = response }, result);
     }
 }
