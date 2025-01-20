@@ -5,6 +5,7 @@ using HR.LeaveManagement.Api.Middleware.Models;
 using HR.LeaveManagement.Application.Contracts.Persistence;
 using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Features.LeaveAllocation.Commands.CreateLeaveAllocation;
+using HR.LeaveManagement.Application.Features.LeaveAllocation.Commands.DeleteLeaveAllocation;
 using HR.LeaveManagement.Application.Features.LeaveAllocation.Commands.UpdateLeaveAllocation;
 using HR.LeaveManagement.Application.Features.LeaveAllocation.Queries.GetLeaveAllocationDetails;
 using HR.LeaveManagement.Application.Features.LeaveAllocation.Queries.GetLeaveAllocations;
@@ -244,4 +245,44 @@ public class LeaveAllocationsControllerTests
 
         _mockMediator.Verify(m => m.Send(It.IsAny<UpdateLeaveAllocationCommand>(), CancellationToken.None), Times.Once);
     }
+    
+    [Fact]
+    public async Task Delete_ValidId_ReturnsNoContent()
+    {
+        // Arrange
+        var validId = 1;
+
+        _mockMediator.Setup(m => m.Send(It.IsAny<DeleteLeaveAllocationCommand>(), CancellationToken.None))
+            .ReturnsAsync(Unit.Value);
+
+        // Act
+        var result = await _leaveAllocationsController.Delete(validId);
+
+        // Assert
+        var noContentResult = result as NoContentResult;
+        noContentResult.ShouldNotBeNull();
+        noContentResult.StatusCode.ShouldBe(StatusCodes.Status204NoContent);
+
+        _mockMediator.Verify(m => m.Send(It.Is<DeleteLeaveAllocationCommand>(cmd => cmd.Id == validId), CancellationToken.None), Times.Once);
+    }
+
+    [Fact]
+    public async Task Delete_NonExistingId_ReturnsNotFound()
+    {
+        // Arrange
+        var invalidId = 99;
+
+        _mockMediator.Setup(m => m.Send(It.IsAny<DeleteLeaveAllocationCommand>(), CancellationToken.None))
+            .ThrowsAsync(new NotFoundException(nameof(LeaveAllocation), invalidId));
+
+        // Act
+        var result = await Should.ThrowAsync<NotFoundException>(() => _leaveAllocationsController.Delete(invalidId));
+
+        // Assert
+        result.ShouldNotBeNull();
+        result.Message.ShouldBe($"{nameof(LeaveAllocation)} ({invalidId}) was not found");
+
+        _mockMediator.Verify(m => m.Send(It.Is<DeleteLeaveAllocationCommand>(cmd => cmd.Id == invalidId), CancellationToken.None), Times.Once);
+    }
+
 }

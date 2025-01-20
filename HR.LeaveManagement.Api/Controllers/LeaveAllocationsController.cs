@@ -1,4 +1,5 @@
 using HR.LeaveManagement.Application.Features.LeaveAllocation.Commands.CreateLeaveAllocation;
+using HR.LeaveManagement.Application.Features.LeaveAllocation.Commands.DeleteLeaveAllocation;
 using HR.LeaveManagement.Application.Features.LeaveAllocation.Commands.UpdateLeaveAllocation;
 using HR.LeaveManagement.Application.Features.LeaveAllocation.Queries.GetLeaveAllocationDetails;
 using HR.LeaveManagement.Application.Features.LeaveAllocation.Queries.GetLeaveAllocations;
@@ -56,5 +57,17 @@ public class LeaveAllocationsController : ControllerBase
         await _mediator.Send(leaveAllocation);
         return NoContent();
     }
+    
+    // DELETE: api/[LeaveAllocationsController]/5
+    [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesDefaultResponseType]
+    public async Task<ActionResult> Delete(int id)
+    {
+        await _mediator.Send(new DeleteLeaveAllocationCommand { Id = id });
+        return NoContent();
+    }
+
     
 }
