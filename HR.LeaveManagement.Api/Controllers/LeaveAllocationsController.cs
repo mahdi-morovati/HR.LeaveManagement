@@ -1,4 +1,5 @@
 using HR.LeaveManagement.Application.Features.LeaveAllocation.Commands.CreateLeaveAllocation;
+using HR.LeaveManagement.Application.Features.LeaveAllocation.Commands.UpdateLeaveAllocation;
 using HR.LeaveManagement.Application.Features.LeaveAllocation.Queries.GetLeaveAllocationDetails;
 using HR.LeaveManagement.Application.Features.LeaveAllocation.Queries.GetLeaveAllocations;
 using MediatR;
@@ -35,10 +36,25 @@ public class LeaveAllocationsController : ControllerBase
 
     // POST: api/[LeaveAllocationsController]
     [HttpPost]
+    [ProducesResponseType(201)]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> Post(CreateLeaveAllocationCommand leaveAllocation)
     {
         var response = await _mediator.Send(leaveAllocation);
         var result = new { Id = response, message = "Leave Allocation created successfully" };
         return CreatedAtAction(nameof(Get), new { id = response }, result);
     }
+
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesDefaultResponseType]
+    public async Task<ActionResult> Put(UpdateLeaveAllocationCommand leaveAllocation)
+    {
+        await _mediator.Send(leaveAllocation);
+        return NoContent();
+    }
+    
 }

@@ -17,8 +17,8 @@ public class UpdateLeaveAllocationCommandHandler : IRequestHandler<UpdateLeaveAl
         ILeaveAllocationRepository leaveAllocationRepository)
     {
         _mapper = mapper;
-        this._leaveTypeRepository = leaveTypeRepository;
-        this._leaveAllocationRepository = leaveAllocationRepository;
+        _leaveTypeRepository = leaveTypeRepository;
+        _leaveAllocationRepository = leaveAllocationRepository;
     }
 
     public async Task<Unit> Handle(UpdateLeaveAllocationCommand request, CancellationToken cancellationToken)
