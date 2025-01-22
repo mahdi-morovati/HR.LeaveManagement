@@ -1,3 +1,4 @@
+using HR.LeaveManagement.Application.Features.LeaveRequest.Queries.GetLeaveRequestDetail;
 using HR.LeaveManagement.Application.Features.LeaveRequest.Queries.GetLeaveRequestList;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +22,16 @@ public class LeaveRequestsController : ControllerBase
     {
         var leaveRequests = await _mediator.Send(new GetLeaveRequestListQuery());
         return Ok(leaveRequests);
-        
+    }
+
+    // Get: api/[LeaveRequestsController]/5
+    [HttpGet("{id}")]
+    public async Task<ActionResult<LeaveRequestDetailsDto>> Get(int id)
+    {
+        var leaveRequest = await _mediator.Send(new GetLeaveRequestDetailQuery()
+        {
+            Id = id
+        });
+        return Ok(leaveRequest);
     }
 }
