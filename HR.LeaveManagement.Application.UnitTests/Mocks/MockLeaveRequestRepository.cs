@@ -61,6 +61,9 @@ public class MockLeaveRequestRepository
         // setup mock methods
 
         // setup GetLeaveRequestWithDetails(int id)
+        
+        mockRepo.Setup(r => r.GetAsync()).ReturnsAsync(leaveRequests);
+        
         mockRepo.Setup(r => r.GetLeaveRequestWithDetails(It.IsAny<int>()))
             .ReturnsAsync((int id) => leaveRequests.FirstOrDefault(lr => lr.Id == id));
 
