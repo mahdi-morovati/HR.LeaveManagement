@@ -1,3 +1,4 @@
+using HR.LeaveManagement.Application.Features.LeaveRequest.Commands.UpdateLeaveRequest;
 using HR.LeaveManagement.Application.Features.LeaveRequest.Queries.GetLeaveRequestDetail;
 using HR.LeaveManagement.Application.Features.LeaveRequest.Queries.GetLeaveRequestList;
 using MediatR;
@@ -34,4 +35,16 @@ public class LeaveRequestsController : ControllerBase
         });
         return Ok(leaveRequest);
     }
+
+    [HttpPut("id")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesDefaultResponseType]
+    public async Task<ActionResult> Put(UpdateLeaveRequestCommand leaveRequestCommand)
+    {
+        await _mediator.Send(leaveRequestCommand);
+        return NoContent();
+    }
+    
 }

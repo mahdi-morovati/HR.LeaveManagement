@@ -47,7 +47,7 @@ public class LeaveAllocationsController : ControllerBase
         return CreatedAtAction(nameof(Get), new { id = response }, result);
     }
 
-    [HttpPut]
+    [HttpPut("id")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
