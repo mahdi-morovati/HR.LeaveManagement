@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HR.LeaveManagement.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,7 +18,7 @@ namespace HR.LeaveManagement.Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    DeafaultDays = table.Column<int>(type: "int", nullable: false),
+                    DefaultDays = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DateModified = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -87,8 +87,8 @@ namespace HR.LeaveManagement.Persistence.Migrations
 
             migrationBuilder.InsertData(
                 table: "LeaveTypes",
-                columns: new[] { "Id", "CreatedBy", "DateCreated", "DateModified", "DeafaultDays", "ModifiedBy", "Name" },
-                values: new object[] { 1, null, new DateTime(2024, 12, 19, 9, 53, 10, 162, DateTimeKind.Local).AddTicks(9343), new DateTime(2024, 12, 19, 9, 53, 10, 170, DateTimeKind.Local).AddTicks(3731), 10, null, "Vacation" });
+                columns: new[] { "Id", "CreatedBy", "DateCreated", "DateModified", "DefaultDays", "ModifiedBy", "Name" },
+                values: new object[] { 1, null, new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 10, null, "Vacation" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_LeaveAllocations_LeaveTypeId",

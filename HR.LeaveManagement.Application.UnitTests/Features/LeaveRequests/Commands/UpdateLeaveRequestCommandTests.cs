@@ -101,7 +101,9 @@ public class UpdateLeaveRequestCommandTests
             => handler.Handle(updateCommand, CancellationToken.None));
         
         exception.Message.ShouldBe(expectedExceptionMessage);
-        exception.ValidationErrors.ShouldContain(v => v.ErrorMessage.Contains(errorMessage));
+        // exception.ValidationErrors.ShouldContain(v => v.ErrorMessage.Contains(errorMessage));
+        exception.ValidationErrors.ShouldContainKey("LeaveTypeId");
+        exception.ValidationErrors["LeaveTypeId"].ShouldContain(errorMessage);
         
         _appLogger.Verify(logger => logger.LogWarning(It.IsAny<string>(), It.IsAny<object[]>()), Times.AtLeastOnce);
         

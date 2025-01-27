@@ -74,13 +74,12 @@ public class CreateLeaveAllocationCommandsTests
         
         _mockRepo.Verify(repo => repo.CreateAsync(It.IsAny<Domain.LeaveAllocation>()), Times.Never);
         
-        exception.ValidationErrors
-            .Any(error => error.PropertyName == "LeaveTypeId" && error.ErrorMessage.Contains("does not exist."))
-            .ShouldBeTrue();
+        exception.ValidationErrors.ShouldContainKey("LeaveTypeId");
+        // exception.ValidationErrors.Any(error => error.PropertyName == "LeaveTypeId" && error.ErrorMessage.Contains("does not exist.")).ShouldBeTrue();
+        exception.ValidationErrors["LeaveTypeId"].ShouldContain("does not exist.");
         
-        exception.ValidationErrors
-            .Any(error => error.PropertyName == "LeaveTypeId" && error.ErrorMessage.Contains("'Leave Type Id' must be greater than '0'."))
-            .ShouldBeTrue();
+        // exception.ValidationErrors.Any(error => error.PropertyName == "LeaveTypeId" && error.ErrorMessage.Contains("'Leave Type Id' must be greater than '0'.")).ShouldBeTrue();
+        exception.ValidationErrors["LeaveTypeId"].ShouldContain("'Leave Type Id' must be greater than '0'.");
 
         
     }

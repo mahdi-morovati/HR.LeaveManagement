@@ -36,8 +36,14 @@ public class HrDatabaseContext : DbContext
             {
                 entry.Entity.DateCreated = DateTime.Now;
             }
+            else
+            {
+                // Preserve the original value of DateCreated for modified entities
+                entry.Property(nameof(BaseEntity.DateCreated)).IsModified = false;
+            }
         }
 
         return base.SaveChangesAsync(cancellationToken);
     }
+
 }

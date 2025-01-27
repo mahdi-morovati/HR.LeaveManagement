@@ -10,8 +10,8 @@ public class BadRequestException : Exception
 
     public BadRequestException(string message, ValidationResult validationResult) : base(message)
     {
-        ValidationErrors = validationResult.Errors;
+        ValidationErrors = validationResult.ToDictionary();
     }
 
-    public List<ValidationFailure> ValidationErrors { get; set; }
+    public IDictionary<string, string[]> ValidationErrors { get; set; }
 }
