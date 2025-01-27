@@ -77,6 +77,9 @@ public class MockLeaveAllocationRepository
         mockRepo.Setup(r => r.GetByIdAsync(It.IsAny<int>()))
             .ReturnsAsync((int id) => leaveAllocations.FirstOrDefault(la => la.Id == id));
 
+        
+        mockRepo.Setup(r => r.GetAsync()).ReturnsAsync(leaveAllocations);
+
         return mockRepo;
     }
 }

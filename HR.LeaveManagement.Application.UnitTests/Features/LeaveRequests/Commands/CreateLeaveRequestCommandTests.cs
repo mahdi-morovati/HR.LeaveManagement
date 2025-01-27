@@ -85,8 +85,10 @@ public class CreateLeaveRequestCommandTests
         exception.Message.ShouldBe("Invalid Leave Request");
         exception.ValidationErrors.ShouldNotBeNull(); // Ensure validation errors exist
 
-        exception.ValidationErrors.Any(error => error.PropertyName == "StartDate" && 
-                                                error.ErrorMessage.Contains("must be before")).ShouldBeTrue();
+        // exception.ValidationErrors.Any(error => error.PropertyName == "StartDate" && error.ErrorMessage.Contains("must be before")).ShouldBeTrue();
+        exception.ValidationErrors.ShouldContainKey("StartDate");
+        exception.ValidationErrors["StartDate"].ShouldContain(msg => msg.Contains("must be before"));
+
         
     }
 
@@ -109,10 +111,9 @@ public class CreateLeaveRequestCommandTests
             await handler.Handle(command, CancellationToken.None);
         });
 
-        exception.ValidationErrors.Any(error =>
-                error.PropertyName == "RequestComments" &&
-                error.ErrorMessage.Contains("is required"))
-            .ShouldBeTrue();
+        // exception.ValidationErrors.Any(error => error.PropertyName == "RequestComments" && error.ErrorMessage.Contains("is required")).ShouldBeTrue();
+        exception.ValidationErrors.ShouldContainKey("RequestComments");
+        exception.ValidationErrors["RequestComments"].ShouldContain(msg => msg.Contains("is required"));
 
     }
     
