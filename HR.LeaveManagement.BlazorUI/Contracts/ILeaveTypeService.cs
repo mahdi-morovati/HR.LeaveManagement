@@ -1,6 +1,13 @@
-﻿namespace HR.LeaveManagement.BlazorUI.Contracts;
+﻿using HR.LeaveManagement.BlazorUI.Models.LeaveTypes;
+using HR.LeaveManagement.BlazorUI.Pages;
+
+namespace HR.LeaveManagement.BlazorUI.Contracts;
 
 public interface ILeaveTypeService
 {
-    
+    Task<List<LeaveTypeVM>> GetLeaveTypes();
+    Task<LeaveTypeVM> GetLeaveTypeDetails(int id);
+    Task<Response<Guid>> CreateLeaveType(LeaveTypeVM leaveType);
+    Task<Response<Guid>> UpdateLeaveType(int id, LeaveTypeVM leaveType);
+    Task<Response<Guid>> DeleteLeaveType(int id);
 }

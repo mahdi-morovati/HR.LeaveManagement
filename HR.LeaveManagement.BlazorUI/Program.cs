@@ -1,3 +1,4 @@
+using System.Reflection;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using HR.LeaveManagement.BlazorUI;
@@ -18,5 +19,7 @@ builder.Services.AddHttpClient<IClient, Client>(client =>
 builder.Services.AddScoped<ILeaveTypeService, LeaveTypeService>();
 builder.Services.AddScoped<ILeaveAllocationService, ILeaveAllocationService>();
 builder.Services.AddScoped<ILeaveRequestService, ILeaveRequestService>();
+
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 await builder.Build().RunAsync();
