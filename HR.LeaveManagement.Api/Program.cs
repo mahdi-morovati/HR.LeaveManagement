@@ -37,6 +37,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("all");
+
 app.MapControllers(); // active controller routes
 
 app.Run();
