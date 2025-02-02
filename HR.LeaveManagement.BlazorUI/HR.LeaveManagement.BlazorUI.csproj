@@ -13,4 +13,9 @@
         <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Layout\MainLayout.razor" />
+      <_ContentIncludedByDefault Remove="Layout\NavMenu.razor" />
+    </ItemGroup>
+
 </Project>
