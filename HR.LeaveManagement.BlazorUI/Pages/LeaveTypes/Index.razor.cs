@@ -13,7 +13,7 @@ public partial class Index
     public ILeaveTypeService LeaveTypeService { get; set; }
     // [Inject]
     // public ILeaveAllocationService LeaveAllocationService { get; set; }
-    [Inject]
+    // [Inject]
     // IToastService toastService { get; set; }
     public List<LeaveTypeVM> LeaveTypes { get; private set; }
     public string Message { get; set; } = string.Empty;
