@@ -13,11 +13,9 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-// builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
-// Microsoft.Extensions.Http
+var apiBaseUrl = builder.Configuration["ApiBaseUrl"] ?? "http://localhost:5193";
 builder.Services.AddHttpClient<IClient, Client>(client =>
-    client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
+    client.BaseAddress = new Uri(apiBaseUrl));
 
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddAuthorizationCore();

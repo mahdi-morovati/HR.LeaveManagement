@@ -16,13 +16,12 @@ builder.Services.AddControllers();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("all", builder => builder.AllowAnyOrigin()
-        .AllowAnyHeader()
-        .AllowAnyMethod()
-    );
+    options.AddPolicy("AllowAll", builder =>
+        builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
 });
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -30,22 +29,13 @@ var app = builder.Build();
 
 app.UseMiddleware<ExceptionMiddleware>();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
-
-app.UseCors("all");
+app.UseCors("AllowAll");
 
 app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers(); // active controller routes
+app.MapControllers();
 
 app.Run();
