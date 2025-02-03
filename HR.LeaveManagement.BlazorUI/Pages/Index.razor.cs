@@ -1,25 +1,31 @@
 // using HR.LeaveManagement.BlazorUI.Contracts;
 // using HR.LeaveManagement.BlazorUI.Providers;
+
+using HR.LeaveManagement.BlazorUI.Contracts;
+using HR.LeaveManagement.BlazorUI.Providers;
+using HR.LeaveManagement.BlazorUI.Services;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
+
 // using Microsoft.AspNetCore.Components.Authorization;
 
 namespace HR.LeaveManagement.BlazorUI.Pages;
 
 public partial class Index
 {
-    // [Inject]
-    // private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+    [Inject]
+    private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
 
     [Inject]
     public NavigationManager NavigationManager { get; set; }
 
-    // [Inject]
-    // public IAuthenticationService AuthenticationService { get; set; }
+    [Inject]
+    public IAuthenticationService AuthenticationService { get; set; }
 
-    // protected async override Task OnInitializedAsync()
-    // {
-    //     await ((ApiAuthenticationStateProvider)AuthenticationStateProvider).GetAuthenticationStateAsync();
-    // }
+    protected async override Task OnInitializedAsync()
+    {
+        await ((ApiAuthenticationStateProvider)AuthenticationStateProvider).GetAuthenticationStateAsync();
+    }
 
     protected void GoToLogin()
     {
@@ -31,8 +37,8 @@ public partial class Index
         NavigationManager.NavigateTo("register/");
     }
 
-    // protected async void Logout()
-    // {
-    //     await AuthenticationService.Logout();
-    // }
+    protected async void Logout()
+    {
+        await AuthenticationService.Logout();
+    }
 }
