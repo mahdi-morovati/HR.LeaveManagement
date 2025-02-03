@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Blazored.LocalStorage;
 using HR.LeaveManagement.BlazorUI.Contracts;
 using HR.LeaveManagement.BlazorUI.Models.LeaveTypes;
 using HR.LeaveManagement.BlazorUI.Pages;
@@ -10,19 +11,21 @@ public class LeaveTypeService : BaseHttpService, ILeaveTypeService
 {
     private readonly IMapper _mapper;
 
-    public LeaveTypeService(IClient client, IMapper mapper) : base(client)
+    public LeaveTypeService(IClient client, IMapper mapper, ILocalStorageService localStorageService) : base(client, localStorageService)
     {
         _mapper = mapper;
     }
 
     public async Task<List<LeaveTypeVM>> GetLeaveTypes()
     {
+        await AddBearerToken();
         var leaveTypes = await Client.LeaveTypesAllAsync();
         return _mapper.Map<List<LeaveTypeVM>>(leaveTypes);
     }
 
     public async Task<LeaveTypeVM> GetLeaveTypeDetails(int id)
     {
+        await AddBearerToken();
         var leaveType = await Client.LeaveTypesGETAsync(id);
         return _mapper.Map<LeaveTypeVM>(leaveType);
     }
@@ -31,6 +34,7 @@ public class LeaveTypeService : BaseHttpService, ILeaveTypeService
     {
         try
         {
+            await AddBearerToken();
             var createLeaveTypeCommand = _mapper.Map<CreateLeaveTypeCommand>(leaveType);
             await Client.LeaveTypesPOSTAsync(createLeaveTypeCommand);
             return new Response<Guid>
@@ -48,6 +52,7 @@ public class LeaveTypeService : BaseHttpService, ILeaveTypeService
     {
         try
         {
+            await AddBearerToken();
             var updateLeaveTypeCommand = _mapper.Map<UpdateLeaveTypeCommand>(leaveType);
             await Client.LeaveTypesPUTAsync(id.ToString(), updateLeaveTypeCommand);
             return new Response<Guid>
@@ -64,7 +69,8 @@ public class LeaveTypeService : BaseHttpService, ILeaveTypeService
     public async Task<Response<Guid>> DeleteLeaveType(int id)
     {
         try
-        { 
+        {
+            await AddBearerToken();
             await Client.LeaveTypesDELETEAsync(id);
             return new Response<Guid>
             {
