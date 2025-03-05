@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "HR.LeaveManagement.Api\\HR.LeaveManagement.Api.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "HR.LeaveManagement.BlazorUI\\HR.LeaveManagement.BlazorUI.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
