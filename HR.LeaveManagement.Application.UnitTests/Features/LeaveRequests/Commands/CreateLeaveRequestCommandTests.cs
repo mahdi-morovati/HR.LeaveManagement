@@ -1,4 +1,6 @@
 using AutoMapper;
+using HR.LeaveManagement.Application.Contracts.Email;
+using HR.LeaveManagement.Application.Contracts.Identity;
 using HR.LeaveManagement.Application.Contracts.Persistence;
 using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Features.LeaveRequest.Commands.CreateLeaveRequest;
@@ -17,9 +19,15 @@ public class CreateLeaveRequestCommandTests
     private readonly Mock<ILeaveRequestRepository> _mockRepo;
     private readonly IMapper _mapper;
     private readonly Mock<ILeaveTypeRepository> _mockLeaveTypeRepo;
+    private readonly Mock<IUserService> _mockUserService;
+    private readonly Mock<ILeaveAllocationRepository> _mockLeaveAllocationRepo;
+    private readonly Mock<IEmailSender> _mockEmailSender;
 
-    public CreateLeaveRequestCommandTests()
+    public CreateLeaveRequestCommandTests(Mock<IUserService> mockUserService, Mock<IEmailSender> mockEmailSender)
     {
+        _mockUserService = mockUserService;
+        _mockEmailSender = mockEmailSender;
+        _mockLeaveAllocationRepo = MockLeaveAllocationRepository.GetMockLeaveAllocationRepository();
         _mockRepo = MockLeaveRequestRepository.GetMockLeaveRequestRepository();
         _mockLeaveTypeRepo = MockLeaveTypeRepository.GetMockLeaveTypeRepository();
 
@@ -35,7 +43,7 @@ public class CreateLeaveRequestCommandTests
     public async Task Handle_ValidLeaveRequest_CreatesLeaveRequest()    
     {
         // Arrange
-        var handler = new CreateLeaveRequestCommandHandler(_mockRepo.Object, _mapper, _mockLeaveTypeRepo.Object);
+        var handler = new CreateLeaveRequestCommandHandler(_mockRepo.Object, _mapper, _mockLeaveTypeRepo.Object, _mockUserService.Object, _mockLeaveAllocationRepo.Object, _mockEmailSender.Object);
         
         // Ensure the LeaveTypeId exists in the mock repository
         _mockLeaveTypeRepo.Setup(repo => repo.GetByIdAsync(1))
@@ -66,7 +74,7 @@ public class CreateLeaveRequestCommandTests
     public async Task Handle_InvalidLeaveType_ThrowsBadRequestException()
     {
         // Arrange
-        var handler = new CreateLeaveRequestCommandHandler(_mockRepo.Object, _mapper, _mockLeaveTypeRepo.Object);
+        var handler = new CreateLeaveRequestCommandHandler(_mockRepo.Object, _mapper, _mockLeaveTypeRepo.Object, _mockUserService.Object, _mockLeaveAllocationRepo.Object, _mockEmailSender.Object);
         
         var command = new CreateLeaveRequestCommand
         {
@@ -96,7 +104,7 @@ public class CreateLeaveRequestCommandTests
     public async Task Handle_InvalidCommandValidation_ThrowsBadRequestException()
     {
         // Arrange 
-        var handler = new CreateLeaveRequestCommandHandler(_mockRepo.Object, _mapper, _mockLeaveTypeRepo.Object);
+        var handler = new CreateLeaveRequestCommandHandler(_mockRepo.Object, _mapper, _mockLeaveTypeRepo.Object, _mockUserService.Object, _mockLeaveAllocationRepo.Object, _mockEmailSender.Object);
         var command = new CreateLeaveRequestCommand
         {
             LeaveTypeId = 1,

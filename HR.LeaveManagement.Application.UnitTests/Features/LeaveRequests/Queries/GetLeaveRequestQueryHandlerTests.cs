@@ -1,4 +1,5 @@
 using AutoMapper;
+using HR.LeaveManagement.Application.Contracts.Identity;
 using HR.LeaveManagement.Application.Contracts.Persistence;
 using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Features.LeaveRequest.Queries.GetLeaveRequestDetail;
@@ -18,9 +19,11 @@ public class GetLeaveRequestQueryHandlerTests
 {
     private readonly Mock<ILeaveRequestRepository> _mockRepo;
     private readonly IMapper _mapper;
+    private readonly Mock<IUserService> _mockUserService;
 
-    public GetLeaveRequestQueryHandlerTests()
+    public GetLeaveRequestQueryHandlerTests(Mock<IUserService> mockUserService)
     {
+        _mockUserService = mockUserService;
         _mockRepo = MockLeaveRequestRepository.GetMockLeaveRequestRepository();
 
         var mapperConfig = new MapperConfiguration(c =>
@@ -38,7 +41,7 @@ public class GetLeaveRequestQueryHandlerTests
     public async Task GetLeaveRequestsWithDetailsTest()
     {
         // Arrange
-        var handler = new GetLeaveRequestListQueryHandler(_mockRepo.Object, _mapper);
+        var handler = new GetLeaveRequestListQueryHandler(_mockRepo.Object, _mapper, _mockUserService.Object);
 
         // Act
         var result = await handler.Handle(new GetLeaveRequestListQuery(), CancellationToken.None);
