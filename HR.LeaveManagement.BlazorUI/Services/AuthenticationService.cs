@@ -39,7 +39,7 @@ public class AuthenticationService : BaseHttpService, IAuthenticationService
     public async Task<bool> RegisterAsync(string firstName, string lastName, string userName, string email,
         string password)
     {
-        RegisterationRequest registrationRequest = new RegisterationRequest()
+        RegistrationRequest registrationRequest = new RegistrationRequest()
             { FirstName = firstName, LastName = lastName, UserName = userName, Email = email, Password = password };
         var response = await Client.RegisterAsync(registrationRequest);
 

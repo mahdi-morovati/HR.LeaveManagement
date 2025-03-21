@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace HR.LeaveManagement.BlazorUI.Pages.LeaveRequests;
 
-public partial class Index : ComponentBase
+public partial class Index
 {
     [Inject] ILeaveRequestService leaveRequestService { get; set; }
     [Inject] NavigationManager NavigationManager { get; set; }

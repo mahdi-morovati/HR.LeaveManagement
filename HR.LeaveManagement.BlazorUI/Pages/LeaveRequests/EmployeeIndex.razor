@@ -1,53 +1,13 @@
-﻿@page "/leaverequests/"
-<h3>Index</h3>
+﻿@page "/leaverequests/employeeindex"
 
-<div class="m-2 d-flex justify-content-end">
-    <a href="/leaverequests/create" class="btn btn-success">Add Leave Request</a>
-</div>
-
-
-<div class="row">
-    <div class="col-md-3">
-        <div class="card text-white bg-info" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Total Requests</h5>
-                <p class="card-text">@Model.TotalRequests</p>
-            </div>
-        </div>
-        
-    </div>
-    <div class="col-md-3">
-        <div class="card text-white bg-warning" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Pending Requests</h5>
-                <p class="card-text">@Model.PendingRequests</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card text-white bg-success" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Approved Requests</h5>
-                <p class="card-text">@Model.ApprovedRequests</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card text-white bg-danger" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Rejected Requests</h5>
-                <p class="card-text">@Model.RejectedRequests</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<br />
-<br />
-
-<hr />
 <h1>Leave Request Log</h1>
 <hr />
+@if (string.IsNullOrEmpty(Message) == false)
+{
+    <div class="alert alert-danger">
+        @Message
+    </div>
+}
 <table id="tblData" class="table">
     <thead>
         <tr>
@@ -112,10 +72,10 @@
                     }
                 </td>
                 <td>
-                    @if (!item.Cancelled)
+                    @if (!item.Cancelled /*&& item.StartDate > DateTime.Now*/)
                     {
-                        <button class="btn btn-outline-primary" @onclick="(() => GoToDetails(item.Id))">
-                            <i class="fa fa-file"></i>Review
+                        <button @onclick="@(() => CancelRequestAsync(item.Id))" class="btn btn-danger">
+                            <i class="fa fa-file"></i>Cancel Request
                         </button>
                     }
 

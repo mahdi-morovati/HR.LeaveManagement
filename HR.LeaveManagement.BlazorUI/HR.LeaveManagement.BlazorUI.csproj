@@ -21,6 +21,14 @@
     <ItemGroup>
       <_ContentIncludedByDefault Remove="Layout\MainLayout.razor" />
       <_ContentIncludedByDefault Remove="Layout\NavMenu.razor" />
+      <_ContentIncludedByDefault Remove="Pages\LeaveRequests\Create.razor" />
+      <_ContentIncludedByDefault Remove="Pages\LeaveRequests\Details.razor" />
+      <_ContentIncludedByDefault Remove="Pages\LeaveRequests\Index.razor" />
+      <_ContentIncludedByDefault Remove="Pages\LeaveTypes\Create.razor" />
+      <_ContentIncludedByDefault Remove="Pages\LeaveTypes\Details.razor" />
+      <_ContentIncludedByDefault Remove="Pages\LeaveTypes\Edit.razor" />
+      <_ContentIncludedByDefault Remove="Pages\LeaveTypes\FormComponent.razor" />
+      <_ContentIncludedByDefault Remove="Pages\LeaveTypes\Index.razor" />
     </ItemGroup>
 
     <ItemGroup>
