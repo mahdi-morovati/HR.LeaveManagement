@@ -1,4 +1,4 @@
-using HR.LeaveManagement.Application.Exceptions;
+using HR.LeaveManagement.Application.Contracts.Logging;
 using HR.LeaveManagement.Application.Features.LeaveType.Commands.CreateLeaveType;
 using HR.LeaveManagement.Application.Features.LeaveType.Commands.DeleteLeaveType;
 using HR.LeaveManagement.Application.Features.LeaveType.Commands.UpdateLeaveType;
@@ -16,10 +16,12 @@ namespace HR.LeaveManagement.Api.Controllers;
 public class LeaveTypesController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IAppLogger<LeaveTypesController> _logger;
 
-    public LeaveTypesController(IMediator mediator)
+    public LeaveTypesController(IMediator mediator, IAppLogger<LeaveTypesController> logger)
     {
         _mediator = mediator;
+        _logger = logger;
     }
 
     // Get: api/[LeaveTypesController]
@@ -34,15 +36,8 @@ public class LeaveTypesController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<LeaveTypeDto>> Get(int id)
     {
-        try
-        {
-            var leaveType = await _mediator.Send(new GetLeaveTypeDetailsQuery(id));
-            return Ok(leaveType);
-        }
-        catch (NotFoundException e)
-        {
-            return NotFound();
-        }
+        var leaveType = await _mediator.Send(new GetLeaveTypeDetailsQuery(id));
+        return Ok(leaveType);
     }
 
     // POST: api/[LeaveTypesController]
@@ -52,24 +47,9 @@ public class LeaveTypesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> Post(CreateLeaveTypeCommand leaveType)
     {
-        try
-        {
-            var response = await _mediator.Send(leaveType);
-            var result = new { id = response, message = "Leave type created successfully" };
-            return CreatedAtAction(nameof(Get), new { id = response }, result);
-        }
-        catch (BadRequestException ex)
-        {
-            return BadRequest(ex.ValidationErrors);
-        }
-        catch (NotFoundException ex)
-        {
-            return NotFound();
-        }
-        catch (Exception e)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred.");
-        }
+        var response = await _mediator.Send(leaveType);
+        var result = new { id = response, message = "Leave type created successfully" };
+        return CreatedAtAction(nameof(Get), new { id = response }, result);
     }
 
     // PUT: api/[LeaveTypesController]/5
@@ -80,23 +60,8 @@ public class LeaveTypesController : ControllerBase
     [ProducesDefaultResponseType]
     public async Task<ActionResult> Put(UpdateLeaveTypeCommand leaveType)
     {
-        try
-        {
-            await _mediator.Send(leaveType);
-            return NoContent();
-        }
-        catch (BadRequestException e)
-        {
-            return BadRequest(e.ValidationErrors);
-        }
-        catch (NotFoundException ex)
-        {
-            return NotFound();
-        }
-        catch (Exception e)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred.");
-        }
+        await _mediator.Send(leaveType);
+        return NoContent();
     }
 
     // DELETE: api/[LeaveTypesController]/5
@@ -106,19 +71,8 @@ public class LeaveTypesController : ControllerBase
     [ProducesDefaultResponseType]
     public async Task<ActionResult> Delete(int id)
     {
-        try
-        {
-            var command = new DeleteLeaveTypeCommand { Id = id };
-            await _mediator.Send(command);
-            return NoContent();
-        }
-        catch (NotFoundException)
-        {
-            return NotFound();
-        }
-        catch (Exception)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred.");
-        }
+        var command = new DeleteLeaveTypeCommand { Id = id };
+        await _mediator.Send(command);
+        return NoContent();
     }
 }

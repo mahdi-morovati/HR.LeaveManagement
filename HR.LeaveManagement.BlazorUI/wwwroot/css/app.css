@@ -101,3 +101,40 @@ a, .btn-link {
 code {
     color: #c02d76;
 }
+
+
+/* Make sure the toast container is visible */
+.blazored-toast-container {
+    z-index: 1050 !important; /* Ensure it appears on top */
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+/* Styling the toast itself */
+.blazored-toast {
+    background-color: #333 !important;  /* Dark background */
+    color: white !important;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Specific styles for different toast types */
+.blazored-toast-success {
+    background-color: #28a745 !important; /* Green */
+}
+
+.blazored-toast-error {
+    background-color: #dc3545 !important; /* Red */
+}
+
+.blazored-toast-warning {
+    background-color: #ffc107 !important; /* Yellow */
+    color: black !important;
+}
+
+.blazored-toast-info {
+    background-color: #17a2b8 !important; /* Blue */
+}
