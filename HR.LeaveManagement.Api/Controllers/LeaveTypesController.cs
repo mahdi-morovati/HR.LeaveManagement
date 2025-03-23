@@ -1,3 +1,4 @@
+using HR.LeaveManagement.Application.Contracts.Logging;
 using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Features.LeaveType.Commands.CreateLeaveType;
 using HR.LeaveManagement.Application.Features.LeaveType.Commands.DeleteLeaveType;
@@ -16,10 +17,12 @@ namespace HR.LeaveManagement.Api.Controllers;
 public class LeaveTypesController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IAppLogger<LeaveTypesController> _logger;
 
-    public LeaveTypesController(IMediator mediator)
+    public LeaveTypesController(IMediator mediator, IAppLogger<LeaveTypesController> logger)
     {
         _mediator = mediator;
+        _logger = logger;
     }
 
     // Get: api/[LeaveTypesController]
@@ -68,6 +71,7 @@ public class LeaveTypesController : ControllerBase
         }
         catch (Exception e)
         {
+            _logger.LogError(e, "An unexpected error occurred.");
             return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred.");
         }
     }
@@ -116,8 +120,9 @@ public class LeaveTypesController : ControllerBase
         {
             return NotFound();
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            _logger.LogError(e, "An unexpected error occurred.");
             return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred.");
         }
     }

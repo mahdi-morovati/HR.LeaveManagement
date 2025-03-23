@@ -1,6 +1,7 @@
 using AutoMapper;
 using FluentValidation.Results;
 using HR.LeaveManagement.Api.Controllers;
+using HR.LeaveManagement.Application.Contracts.Logging;
 using HR.LeaveManagement.Application.Contracts.Persistence;
 using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Features.LeaveRequest.Commands.UpdateLeaveRequest;
@@ -27,14 +28,16 @@ public class LeaveTypesControllerTests
     private readonly LeaveTypesController _leaveTypesController;
     private readonly Mock<ILeaveTypeRepository> _mockRepo;
     private readonly IMapper _mapper;
+    private readonly Mock<IAppLogger<LeaveTypesController>> _mockLogger;
 
-    public LeaveTypesControllerTests()
+    public LeaveTypesControllerTests(Mock<IAppLogger<LeaveTypesController>> mockLogger)
     {
+        _mockLogger = mockLogger;
         _mockRepo = MockLeaveTypeRepository.GetMockLeaveTypeRepository();
 
         _mockMediator = new Mock<IMediator>();
 
-        _leaveTypesController = new LeaveTypesController(_mockMediator.Object);
+        _leaveTypesController = new LeaveTypesController(_mockMediator.Object, _mockLogger.Object);
 
         var mapperConfig = new MapperConfiguration(c => { c.AddProfile<LeaveTypeProfile>(); });
         _mapper = mapperConfig.CreateMapper();

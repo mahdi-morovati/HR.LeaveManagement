@@ -14,9 +14,10 @@ public class UserService : IUserService
     
     public string UserId { get => _contextAccessor.HttpContext?.User?.FindFirstValue("uid"); }
 
-    public UserService(UserManager<ApplicationUser> userManager)
+    public UserService(UserManager<ApplicationUser> userManager, IHttpContextAccessor contextAccessor)
     {
         _userManager = userManager;
+        _contextAccessor = contextAccessor;
     }
 
     public async Task<List<Employee>> GetEmployees()
