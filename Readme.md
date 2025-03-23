@@ -16,10 +16,10 @@ Welcome to the **HR Leave Management System** repository! This project is a comp
 ## 🛠️ Tech Stack
 
 - **Backend**: ASP.NET Core (.NET Framework)
-- **Frontend**: Razor Pages / Blazor
+- **Frontend**: Blazor
 - **Database**: SQL Server
 - **Authentication**: ASP.NET Identity
-- **Hosting**: IIS / Azure / Docker (optional)
+- **Hosting**: IIS / Docker (optional)
 - **Logging**: Serilog
 
 ---
@@ -32,7 +32,7 @@ HR.LeaveManagement/
 ├── HR.LeaveManagement.Application # Application services and DTOs
 ├── HR.LeaveManagement.Persistence # Database context and migrations
 ├── HR.LeaveManagement.API         # API endpoints
-├── HR.LeaveManagement.UI          # Frontend (Razor Pages)
+├── HR.LeaveManagement.BlazorUI          # Frontend (Blazor)
 └── HR.LeaveManagement.Tests       # Unit and integration tests
 ```
 
@@ -42,9 +42,9 @@ HR.LeaveManagement/
 
 Ensure you have the following installed:
 
-- .NET 6 SDK or later
+- .NET 8 SDK or later
 - SQL Server (local or cloud-based)
-- Visual Studio or VS Code
+- Visual Studio, VS Code or Rider
 - Git
 - Docker (optional, for containerized deployment)
 
@@ -67,11 +67,12 @@ Ensure you have the following installed:
 
 3. **Run the application:**
    ```bash
-   dotnet run --project HR.LeaveManagement.UI
+   dotnet run --project HR.LeaveManagement.BlazorUI
+   dotnet run --project HR.LeaveManagement.Api
    ```
 
 4. **Access the app:**
-   - Open your browser and navigate to `http://localhost:5000`.
+   - Open your browser and navigate to `http://localhost:5281`.
 
 ---
 
