@@ -1,18 +1,20 @@
-using HR.LeaveManagement.Api.Middleware;
+﻿using HR.LeaveManagement.Api.Middleware;
 using HR.LeaveManagement.Application;
 using HR.LeaveManagement.Identity;
 using HR.LeaveManagement.Infrastructure;
 using HR.LeaveManagement.Persistence;
 using Prometheus;
 using Serilog;
+using Serilog.Sinks.Graylog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Host.UseSerilog((context, loggerConfig) => loggerConfig
-    .WriteTo.Console()
-    .ReadFrom.Configuration(context.Configuration)
-);
+builder.Host.UseSerilog((context, loggerConfig) =>
+{
+    loggerConfig.ReadFrom.Configuration(context.Configuration);
+});
+
+
 
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
@@ -32,6 +34,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 

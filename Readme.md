@@ -20,7 +20,7 @@ Welcome to the **HR Leave Management System** repository! This project is a comp
 - **Database**: SQL Server
 - **Authentication**: ASP.NET Identity
 - **Hosting**: IIS / Docker (optional)
-- **Logging**: Serilog
+- **Logging**: Serilog + Graylog
 - **Monitoring**: Prometheus + Grafana
 
 ---
@@ -98,19 +98,13 @@ Contributions are welcome! To get started:
 
 ---
 
-## 🧚‍♂️ Testing
+## 🧩 Testing
 
 - Run unit tests:
   ```bash
   dotnet test
   ```
 - Ensure all tests pass before submitting changes.
-
----
-
-## 🌟 Acknowledgments
-
-Special thanks to the open-source community and everyone who contributed to making this project possible!
 
 ---
 
@@ -214,8 +208,53 @@ app.MapMetrics();       // Enables /metrics endpoint
 | `dotnet_collection_count_total` | .NET garbage collections count  |
 | `process_cpu_seconds_total`   | Total CPU time consumed          |
 
+---
 
---- 
+## 📋 Logging with Serilog + Graylog
+
+To centralize and analyze logs, Serilog is configured to send logs to Graylog.
+
+### 🛠️ Configuration
+
+In `appsettings.json`:
+
+```json
+"Serilog": {
+  "Using": [ "Serilog.Sinks.Console", "Serilog.Sinks.Graylog" ],
+  "MinimumLevel": {
+    "Default": "Information",
+    "Override": {
+      "Microsoft": "Warning",
+      "System": "Warning"
+    }
+  },
+  "Enrich": [ "FromLogContext" ],
+  "WriteTo": [
+    { "Name": "Console" },
+    {
+      "Name": "Graylog",
+      "Args": {
+        "hostnameOrAddress": "localhost",
+        "port": 12201,
+        "transportType": "Udp",
+        "facility": "HR.LeaveManagement",
+        "shortMessageMaxLength": 5000
+      }
+    }
+  ]
+}
+```
+
+In `Program.cs`:
+
+```csharp
+builder.Host.UseSerilog((context, loggerConfig) =>
+{
+    loggerConfig.ReadFrom.Configuration(context.Configuration);
+});
+```
+
+---
 
 ## 📜 License
 
