@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
@@ -7,17 +7,28 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.10"/>
+      <Compile Remove="NewFolder1\**" />
+      <Content Remove="NewFolder1\**" />
+      <EmbeddedResource Remove="NewFolder1\**" />
+      <None Remove="NewFolder1\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.10" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="prometheus-net.AspNetCore" Version="8.2.1" />
         <PackageReference Include="Serilog" Version="4.2.0" />
         <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
         <PackageReference Include="Serilog.Extensions.Logging" Version="9.0.0" />
         <PackageReference Include="Serilog.Settings.Configuration" Version="9.0.0" />
         <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
+        <PackageReference Include="Serilog.Sinks.Grafana.Loki" Version="8.3.0" />
+        <PackageReference Include="Serilog.Sinks.Graylog" Version="3.1.1" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     </ItemGroup>
 
     <ItemGroup>
@@ -31,6 +42,10 @@
       <Reference Include="Newtonsoft.Json">
         <HintPath>..\..\..\.nuget\packages\newtonsoft.json\13.0.3\lib\net6.0\Newtonsoft.Json.dll</HintPath>
       </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="logs\" />
     </ItemGroup>
 
 </Project>
