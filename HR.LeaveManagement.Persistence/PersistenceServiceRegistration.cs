@@ -4,6 +4,7 @@ using HR.LeaveManagement.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace HR.LeaveManagement.Persistence;
 
@@ -15,6 +16,11 @@ public static class PersistenceServiceRegistration
         services.AddDbContext<HrDatabaseContext>(options =>
         {
             options.UseSqlServer(configuration.GetConnectionString("HrDatabaseConnectionString"));
+            
+            // display queries in SQL Server Profiler
+            options.EnableSensitiveDataLogging();
+            options.LogTo(Console.WriteLine, LogLevel.Information);
+            
         });
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
