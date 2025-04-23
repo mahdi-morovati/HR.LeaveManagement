@@ -1,0 +1,45 @@
+﻿services:
+  graylog:
+    image: graylog/graylog:5.1
+    environment:
+      - GRAYLOG_PASSWORD_SECRET=randomSecret123456 # admin
+      - GRAYLOG_ROOT_PASSWORD_SHA2=ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f # password123
+      - GRAYLOG_HTTP_EXTERNAL_URI=http://127.0.0.1:9000/
+    depends_on:
+      mongo:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+    ports:
+      - "9000:9000"
+      - "12201:12201/udp"
+    volumes:
+      - graylog_data:/usr/share/graylog/data
+
+  mongo:
+    image: mongo:6
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - mongo_data:/data/db
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.2
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+
+volumes:
+  graylog_data:
+  mongo_data:
+  es_data:

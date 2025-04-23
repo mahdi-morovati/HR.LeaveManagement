@@ -1,10 +1,11 @@
-using HR.LeaveManagement.Api.Middleware;
+﻿using HR.LeaveManagement.Api.Middleware;
 using HR.LeaveManagement.Application;
 using HR.LeaveManagement.Identity;
 using HR.LeaveManagement.Infrastructure;
 using HR.LeaveManagement.Persistence;
 using Prometheus;
 using Serilog;
+using Serilog.Sinks.Graylog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,22 @@ builder.Host.UseSerilog((context, loggerConfig) => loggerConfig
     .WriteTo.Console()
     .ReadFrom.Configuration(context.Configuration)
 );
+
+
+builder.Host.UseSerilog((context, loggerConfig) => loggerConfig
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .WriteTo.Graylog(new GraylogSinkOptions
+    {
+        HostnameOrAddress = "localhost", // فقط IP یا نام هاست، نه http://
+        Port = 12201,
+        TransportType = Serilog.Sinks.Graylog.Core.Transport.TransportType.Udp,
+        Facility = "HR.LeaveManagement",
+        ShortMessageMaxLength = 5000,
+    })
+    .ReadFrom.Configuration(context.Configuration));
+
+
 
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
@@ -32,6 +49,9 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Host.UseSerilog();
+
 
 var app = builder.Build();
 
